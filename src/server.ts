@@ -19,9 +19,6 @@ class FileSource implements Source {
 				buffer.byteOffset,
 				buffer.byteOffset + buffer.byteLength
 			),
-			etag: undefined,
-			expires: undefined,
-			cacheControl: undefined,
 		};
 	}
 
@@ -47,9 +44,7 @@ const init = async () => {
 					Number(y)
 				);
 
-				if (!tile) {
-					return res.status(404).send("Tile not found");
-				}
+				if (!tile) return res.status(404).send("Tile not found");
 
 				const modifiedTile = vtt((layers, done) => {
 					for (const layer of layers) {
@@ -71,7 +66,6 @@ const init = async () => {
 					modifiedTile.end(buffer);
 				});
 
-				// Set the appropriate content type
 				res.setHeader("Content-Type", "application/x-protobuf");
 				res.send(modifiedBuffer);
 			} catch (error) {
@@ -81,9 +75,7 @@ const init = async () => {
 		});
 
 		const port = process.env.PORT || 8080;
-		app.listen(port, () => {
-			console.log(`Server running on port ${port}`);
-		});
+		app.listen(port, () => console.log(`Server running on port ${port}`));
 	} catch (error) {
 		console.error("Initialization error:", error);
 	}
