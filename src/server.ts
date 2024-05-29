@@ -2,9 +2,7 @@ import path from "path";
 import { PMTiles, Source, RangeResponse } from "pmtiles";
 import express from "express";
 import fs from "fs/promises";
-import Pbf from "pbf";
-import { VectorTile } from "@mapbox/vector-tile";
-import geobuf from "geobuf";
+import vtt from "vtt";
 
 const app = express();
 
@@ -53,39 +51,29 @@ const init = async () => {
 					return res.status(404).send("Tile not found");
 				}
 
-				const pbf = new Pbf(tile.data);
-				const vectorTile = new VectorTile(pbf);
-
-				const features = [];
-				for (const layerName in vectorTile.layers) {
-					const layer = vectorTile.layers[layerName];
-					for (let i = 0; i < layer.length; i++) {
-						const feature = layer.feature(i);
-						feature.properties.customProperty = `Custom Value for ID ${feature.properties.id}`;
-						features.push(
-							feature.toGeoJSON(Number(x), Number(y), Number(z))
-						);
+				const modifiedTile = vtt((layers, done) => {
+					for (const layer of layers) {
+						for (const feature of layer.features) {
+							feature.properties.customProperty = `Custom Value for ID ${feature.id}`;
+						}
 					}
-				}
+					done(null, layers);
+				});
 
-				let geoJsonLayer = {
-					type: "FeatureCollection",
-					features: features,
-				};
-
-				// Encode GeoJSON to Geobuf
-				const geobufBuffer = geobuf.encode(geoJsonLayer, new Pbf());
-
-				var geojson = geobuf.decode(new Pbf(geobufBuffer));
-
-				console.log(geojson);
-
-				// Convert UInt8Array to Node.js Buffer
-				const buffer = Buffer.from(geobufBuffer);
+				const buffer = Buffer.from(tile.data);
+				const modifiedBuffer = await new Promise((resolve, reject) => {
+					const chunks = [];
+					modifiedTile.on("data", (chunk) => chunks.push(chunk));
+					modifiedTile.on("end", () =>
+						resolve(Buffer.concat(chunks))
+					);
+					modifiedTile.on("error", reject);
+					modifiedTile.end(buffer);
+				});
 
 				// Set the appropriate content type
 				res.setHeader("Content-Type", "application/x-protobuf");
-				res.send(buffer);
+				res.send(modifiedBuffer);
 			} catch (error) {
 				console.error("Error processing tile request:", error);
 				res.status(500).send("Internal Server Error");
