@@ -13,7 +13,7 @@ import express from "express";
 import fs from "fs/promises";
 import Pbf from "pbf";
 import { VectorTile } from "@mapbox/vector-tile";
-import geobuf from "geobuf";
+import vtpbf from "vt-pbf";
 const app = express();
 class FileSource {
     constructor(filename) {
@@ -43,7 +43,7 @@ const init = () => __awaiter(void 0, void 0, void 0, function* () {
         yield fs.access(pmtilesPath);
         const source = new FileSource(pmtilesPath);
         const pmtiles = new PMTiles(source);
-        app.get("/tiles/:z/:x/:y.pbf", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        app.get("/tiles/:z/:x/:y.mvt", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             try {
                 const { z, x, y } = req.params;
                 const tile = yield pmtiles.getZxy(Number(z), Number(x), Number(y));
@@ -52,26 +52,26 @@ const init = () => __awaiter(void 0, void 0, void 0, function* () {
                 }
                 const pbf = new Pbf(tile.data);
                 const vectorTile = new VectorTile(pbf);
-                const features = [];
+                const layers = {};
                 for (const layerName in vectorTile.layers) {
                     const layer = vectorTile.layers[layerName];
+                    const features = [];
                     for (let i = 0; i < layer.length; i++) {
                         const feature = layer.feature(i);
                         feature.properties.customProperty = `Custom Value for ID ${feature.properties.id}`;
                         features.push(feature.toGeoJSON(Number(x), Number(y), Number(z)));
                     }
+                    layers[layerName] = {
+                        type: "FeatureCollection",
+                        features: features,
+                    };
                 }
-                let geoJsonLayer = {
-                    type: "FeatureCollection",
-                    features: features,
-                };
-                // Encode GeoJSON to Geobuf
-                const geobufBuffer = geobuf.encode(geoJsonLayer, new Pbf());
-                // Convert UInt8Array to Node.js Buffer
-                const buffer = Buffer.from(geobufBuffer);
-                // Set the appropriate content type
+                console.log(layers);
+                // Encode the modified features back to MVT
+                const modifiedTileData = vtpbf(layers);
+                // Set the appropriate content type for MVT
                 res.setHeader("Content-Type", "application/x-protobuf");
-                res.send(buffer);
+                res.send(Buffer.from(modifiedTileData));
             }
             catch (error) {
                 console.error("Error processing tile request:", error);

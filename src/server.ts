@@ -76,6 +76,10 @@ const init = async () => {
 				// Encode GeoJSON to Geobuf
 				const geobufBuffer = geobuf.encode(geoJsonLayer, new Pbf());
 
+				var geojson = geobuf.decode(new Pbf(geobufBuffer));
+
+				console.log(geojson);
+
 				// Convert UInt8Array to Node.js Buffer
 				const buffer = Buffer.from(geobufBuffer);
 
