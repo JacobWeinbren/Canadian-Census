@@ -1,36 +1,42 @@
 import csv
 
 
-def get_total_values(file_path):
-    """
-    Identify and collect total variables from the CSV file.
-    - Uses a threshold (10,000) to identify calculated variables.
-    - Tracks current total variable to group related sub-variables.
-    - Ensures calculated variables are retained as proportions of themselves.
-    """
-    total_values = set()
-    current_total = None
+def get_computed_values(file_path):
+    computed_values = set()
+    current_header = None
 
+    # Open the CSV file for reading
     with open(file_path, mode="r", newline="", encoding="latin1") as file:
         reader = csv.DictReader(file)
 
         for row in reader:
-            # Check if the row is for the country level and has a total count less than 10,000
-            if (
-                row["GEO_LEVEL"] == "Country"
-                and row["C1_COUNT_TOTAL"]
-                and float(row["C1_COUNT_TOTAL"]) < 10000
-            ):
+            # Check if the row is for the country level
+            if row["GEO_LEVEL"] == "Country":
                 characteristic_name = row["CHARACTERISTIC_NAME"]
+                char_id = row["CHARACTERISTIC_ID"]
 
-                # If the characteristic name is not indented, it is a total variable
-                if not characteristic_name.startswith(" "):
-                    current_total = characteristic_name
+                # Check if the characteristic name is a header
+                if (
+                    "Average" in characteristic_name
+                    or "Median" in characteristic_name
+                    or " %" in characteristic_name
+                    or "(%)" in characteristic_name
+                    or "index" in characteristic_name
+                    or " rate" in characteristic_name
+                    or "($)" in characteristic_name
+                ):
+                    # Add the characteristic name to the set of computed values
+                    computed_values.add(char_id)
 
-                # Add the current total variable to the set
-                if current_total not in total_values:
-                    total_values.add(current_total)
+                    # If the characteristic name is a header, set it as the current header
+                    if not characteristic_name.startswith(" "):
+                        current_header = characteristic_name
 
-                    print(current_total)
+                # If the characteristic name is not a header and there is a current header
+                elif characteristic_name.startswith(" ") and current_header:
+                    computed_values.add(char_id)
 
-    return total_values
+                else:
+                    current_header = None
+
+    return computed_values

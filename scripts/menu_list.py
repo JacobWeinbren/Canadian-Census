@@ -1,66 +1,82 @@
 import csv
 import json
-from computed_values import (
-    get_total_values,
-)
+from collections import OrderedDict
+from computed_values import get_computed_values
 
 
-def parse_characteristics(file_path, total_values):
-    """
-    Parse CSV to extract characteristics, organizing them into a structured list.
-    - Indentation determines if a characteristic is a total variable.
-    - Avoids duplicate IDs to ensure unique entries.
-    - Associates sub-variables with their total variable to calculate proportions.
-    - Updates total variable if in total_values set to retain calculated values.
-    """
-    characteristics = []
-    current_total_variable = None
-    added_ids = set()
+def extract_menu_items(file_path, computed_values):
+    # Initialize an ordered dictionary to store menu items
+    menu_items = OrderedDict()
+    current_heading = "Aggregate"
+    current_heading_id = None
+    processed_ids = set()
+    computed_keys = [int(key) for key in computed_values]
 
+    # Open the CSV file for reading
     with open(file_path, mode="r", encoding="latin1") as file:
         reader = csv.DictReader(file)
+        rows = list(reader)
 
-        for row in reader:
-            characteristic_name = row["CHARACTERISTIC_NAME"]
-            characteristic_id = int(row["CHARACTERISTIC_ID"])
-            indentation = len(characteristic_name) - len(characteristic_name.lstrip())
+    for i, row in enumerate(rows):
+        name = row["CHARACTERISTIC_NAME"].strip()
+        char_id = int(row["CHARACTERISTIC_ID"])
+        indentation = len(row["CHARACTERISTIC_NAME"]) - len(name)
 
-            # If the characteristic is not indented, it is a total variable
-            if indentation == 0:
-                current_total_variable = characteristic_id
-            total_variable = current_total_variable
+        # Skip already processed IDs to avoid duplicates
+        if char_id in processed_ids:
+            continue
 
-            # Skip if the ID has already been added to avoid duplicates
-            if characteristic_id in added_ids:
-                continue
+        # Calculate next_indentation before performing the test
+        next_indentation = 0
+        if i + 1 < len(rows):
+            next_row = rows[i + 1]
+            next_name = next_row["CHARACTERISTIC_NAME"].strip()
+            next_indentation = len(next_row["CHARACTERISTIC_NAME"]) - len(next_name)
 
-            # Add the characteristic to the list
-            characteristics.append(
-                {
-                    "characteristic_name": characteristic_name.strip(),
-                    "indentation": indentation,
-                    "total_variable": total_variable,
-                    "characteristic_id": characteristic_id,
-                }
-            )
-            added_ids.add(characteristic_id)
+        # If no indentation and no indented items below, add to "Aggregate"
+        if indentation == 0 and next_indentation == 0:
+            current_heading = "Aggregate"
+            current_heading_id = None
+            divisor = None
 
-            # If the characteristic name is in the total_values set, update the total_variable
-            if characteristic_name.strip() in total_values:
-                characteristics[-1]["total_variable"] = characteristic_id
+        # If no indentation but indented items below, set current heading to the name
+        if indentation == 0 and next_indentation > 0:
+            current_heading = name.replace("Total - ", "")
+            current_heading_id = char_id
+            continue
 
-    return characteristics
+        # If the item is indented, determine if it is a computed value
+        if indentation > 0:
+            if char_id in computed_keys:
+                divisor = None
+            else:
+                divisor = current_heading_id
+
+        # Initialise the heading in the dictionary if not already present
+        if current_heading not in menu_items:
+            menu_items[current_heading] = []
+
+        # Append the current item to the list under the current heading
+        menu_items[current_heading].append(
+            {"id": char_id, "name": name, "divisor": divisor}
+        )
+
+        # Mark the current ID as processed
+        processed_ids.add(char_id)
+
+    return menu_items
 
 
+# File paths
 file_path = "data/census/98-401-X2021006_English_CSV_data_Territories.csv"
 output_file_path = "output/menu_list.json"
 
-# Get the total values from the computed_values script
-total_values = get_total_values(file_path)
+# Get computed values
+computed_values = get_computed_values(file_path)
 
-# Parse the characteristics from the CSV file
-characteristics_list = parse_characteristics(file_path, total_values)
+# Extract menu items from the CSV file
+menu_items = extract_menu_items(file_path, computed_values)
 
-# Save the list to a JSON file
+# Write the menu items to a JSON file
 with open(output_file_path, mode="w", encoding="utf-8") as json_file:
-    json.dump(characteristics_list, json_file, ensure_ascii=False, indent=4)
+    json.dump(menu_items, json_file, ensure_ascii=False, indent=4)
