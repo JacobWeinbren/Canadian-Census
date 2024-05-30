@@ -6,3 +6,4 @@ map/
 .DS_Store
 dist/
 database/
+__pycache__/

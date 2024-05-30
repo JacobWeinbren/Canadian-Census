@@ -1,5 +1,53 @@
 [
     {
+        "characteristic_name": "Population, 2021",
+        "indentation": 0,
+        "total_variable": 1,
+        "characteristic_id": 1
+    },
+    {
+        "characteristic_name": "Population, 2016",
+        "indentation": 0,
+        "total_variable": 2,
+        "characteristic_id": 2
+    },
+    {
+        "characteristic_name": "Population percentage change, 2016 to 2021",
+        "indentation": 0,
+        "total_variable": 3,
+        "characteristic_id": 3
+    },
+    {
+        "characteristic_name": "Total private dwellings",
+        "indentation": 0,
+        "total_variable": 4,
+        "characteristic_id": 4
+    },
+    {
+        "characteristic_name": "Private dwellings occupied by usual residents",
+        "indentation": 0,
+        "total_variable": 5,
+        "characteristic_id": 5
+    },
+    {
+        "characteristic_name": "Population density per square kilometre",
+        "indentation": 0,
+        "total_variable": 6,
+        "characteristic_id": 6
+    },
+    {
+        "characteristic_name": "Land area in square kilometres",
+        "indentation": 0,
+        "total_variable": 7,
+        "characteristic_id": 7
+    },
+    {
+        "characteristic_name": "Total - Age groups of the population - 100% data",
+        "indentation": 0,
+        "total_variable": 8,
+        "characteristic_id": 8
+    },
+    {
         "characteristic_name": "0 to 14 years",
         "indentation": 2,
         "total_variable": 8,
@@ -150,6 +198,12 @@
         "characteristic_id": 33
     },
     {
+        "characteristic_name": "Total - Distribution (%) of the population by broad age groups - 100% data",
+        "indentation": 0,
+        "total_variable": 34,
+        "characteristic_id": 34
+    },
+    {
         "characteristic_name": "0 to 14 years",
         "indentation": 2,
         "total_variable": 34,
@@ -172,6 +226,24 @@
         "indentation": 4,
         "total_variable": 34,
         "characteristic_id": 38
+    },
+    {
+        "characteristic_name": "Average age of the population",
+        "indentation": 0,
+        "total_variable": 39,
+        "characteristic_id": 39
+    },
+    {
+        "characteristic_name": "Median age of the population",
+        "indentation": 0,
+        "total_variable": 40,
+        "characteristic_id": 40
+    },
+    {
+        "characteristic_name": "Total - Occupied private dwellings by structural type of dwelling - 100% data",
+        "indentation": 0,
+        "total_variable": 41,
+        "characteristic_id": 41
     },
     {
         "characteristic_name": "Single-detached house",
@@ -222,6 +294,12 @@
         "characteristic_id": 49
     },
     {
+        "characteristic_name": "Total - Private households by household size - 100% data",
+        "indentation": 0,
+        "total_variable": 50,
+        "characteristic_id": 50
+    },
+    {
         "characteristic_name": "1 person",
         "indentation": 2,
         "total_variable": 50,
@@ -250,6 +328,24 @@
         "indentation": 2,
         "total_variable": 50,
         "characteristic_id": 55
+    },
+    {
+        "characteristic_name": "Number of persons in private households",
+        "indentation": 0,
+        "total_variable": 56,
+        "characteristic_id": 56
+    },
+    {
+        "characteristic_name": "Average household size",
+        "indentation": 0,
+        "total_variable": 57,
+        "characteristic_id": 57
+    },
+    {
+        "characteristic_name": "Total - Marital status for the total population aged 15 years and over - 100% data",
+        "indentation": 0,
+        "total_variable": 58,
+        "characteristic_id": 58
     },
     {
         "characteristic_name": "Married or living common-law",
@@ -324,6 +420,12 @@
         "characteristic_id": 70
     },
     {
+        "characteristic_name": "Total - Census families in private households by family size - 100% data",
+        "indentation": 0,
+        "total_variable": 71,
+        "characteristic_id": 71
+    },
+    {
         "characteristic_name": "2 persons",
         "indentation": 2,
         "total_variable": 71,
@@ -346,6 +448,24 @@
         "indentation": 2,
         "total_variable": 71,
         "characteristic_id": 75
+    },
+    {
+        "characteristic_name": "Average size of census families",
+        "indentation": 0,
+        "total_variable": 76,
+        "characteristic_id": 76
+    },
+    {
+        "characteristic_name": "Average number of children in census families with children",
+        "indentation": 0,
+        "total_variable": 77,
+        "characteristic_id": 77
+    },
+    {
+        "characteristic_name": "Total number of census families in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 78,
+        "characteristic_id": 78
     },
     {
         "characteristic_name": "Total couple families",
@@ -408,6 +528,12 @@
         "characteristic_id": 88
     },
     {
+        "characteristic_name": "Total - Persons in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 89,
+        "characteristic_id": 89
+    },
+    {
         "characteristic_name": "Total - Persons in census families",
         "indentation": 2,
         "total_variable": 89,
@@ -468,6 +594,12 @@
         "characteristic_id": 99
     },
     {
+        "characteristic_name": "Total - Household type - 100% data",
+        "indentation": 0,
+        "total_variable": 100,
+        "characteristic_id": 100
+    },
+    {
         "characteristic_name": "One-census-family households without additional persons",
         "indentation": 2,
         "total_variable": 100,
@@ -526,6 +658,12 @@
         "indentation": 2,
         "total_variable": 100,
         "characteristic_id": 110
+    },
+    {
+        "characteristic_name": "Total - Income statistics in 2020 for the population aged 15 years and over in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 111,
+        "characteristic_id": 111
     },
     {
         "characteristic_name": "Number of total income recipients aged 15 years and over in private households in 2020 - 100% data",
@@ -612,6 +750,12 @@
         "characteristic_id": 125
     },
     {
+        "characteristic_name": "Total - Income statistics in 2020 for the population aged 15 years and over in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 126,
+        "characteristic_id": 126
+    },
+    {
         "characteristic_name": "Number of total income recipients aged 15 years and over in private households in 2020 - 25% sample data",
         "indentation": 2,
         "total_variable": 126,
@@ -696,6 +840,12 @@
         "characteristic_id": 140
     },
     {
+        "characteristic_name": "Total - Employment income statistics in 2020 for the population aged 15 years and over in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 141,
+        "characteristic_id": 141
+    },
+    {
         "characteristic_name": "Number of employment income recipients in 2020 who worked full-year full-time in 2020 - 25% sample data",
         "indentation": 2,
         "total_variable": 141,
@@ -732,6 +882,12 @@
         "characteristic_id": 147
     },
     {
+        "characteristic_name": "Composition of total income in 2020 of the population aged 15 years and over in private households (%) - 25% sample data",
+        "indentation": 0,
+        "total_variable": 148,
+        "characteristic_id": 148
+    },
+    {
         "characteristic_name": "Market income (%)",
         "indentation": 2,
         "total_variable": 148,
@@ -766,6 +922,12 @@
         "indentation": 6,
         "total_variable": 148,
         "characteristic_id": 154
+    },
+    {
+        "characteristic_name": "Total - Total income groups in 2020 for the population aged 15 years and over in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 155,
+        "characteristic_id": 155
     },
     {
         "characteristic_name": "Without total income",
@@ -858,6 +1020,12 @@
         "characteristic_id": 170
     },
     {
+        "characteristic_name": "Total - After-tax income groups in 2020 for the population aged 15 years and over in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 171,
+        "characteristic_id": 171
+    },
+    {
         "characteristic_name": "Without after-tax income",
         "indentation": 2,
         "total_variable": 171,
@@ -946,6 +1114,12 @@
         "indentation": 6,
         "total_variable": 171,
         "characteristic_id": 186
+    },
+    {
+        "characteristic_name": "Total - Employment income groups in 2020 for the population aged 15 years and over in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 187,
+        "characteristic_id": 187
     },
     {
         "characteristic_name": "Without employment income",
@@ -1044,6 +1218,12 @@
         "characteristic_id": 203
     },
     {
+        "characteristic_name": "Total - Income statistics in 2019 for the population aged 15 years and over in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 204,
+        "characteristic_id": 204
+    },
+    {
         "characteristic_name": "Number of total income recipients aged 15 years and over in private households in 2019 - 100% data",
         "indentation": 2,
         "total_variable": 204,
@@ -1114,6 +1294,12 @@
         "indentation": 4,
         "total_variable": 204,
         "characteristic_id": 216
+    },
+    {
+        "characteristic_name": "Total - Income statistics in 2019 for the population aged 15 years and over in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 217,
+        "characteristic_id": 217
     },
     {
         "characteristic_name": "Number of total income recipients aged 15 years and over in private households in 2019 - 25% sample data",
@@ -1188,6 +1374,12 @@
         "characteristic_id": 229
     },
     {
+        "characteristic_name": "Total - Employment income statistics in 2019 for the population aged 15 years and over in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 230,
+        "characteristic_id": 230
+    },
+    {
         "characteristic_name": "Number of employment income recipients in 2019 who worked full-year full-time in 2020 - 25% sample data",
         "indentation": 2,
         "total_variable": 230,
@@ -1224,6 +1416,12 @@
         "characteristic_id": 236
     },
     {
+        "characteristic_name": "Composition of total income in 2019 of the population aged 15 years and over in private households (%) - 25% sample data",
+        "indentation": 0,
+        "total_variable": 237,
+        "characteristic_id": 237
+    },
+    {
         "characteristic_name": "Market income (%)",
         "indentation": 2,
         "total_variable": 237,
@@ -1246,6 +1444,12 @@
         "indentation": 4,
         "total_variable": 237,
         "characteristic_id": 241
+    },
+    {
+        "characteristic_name": "Total - Income statistics for private households - 100% data",
+        "indentation": 0,
+        "total_variable": 242,
+        "characteristic_id": 242
     },
     {
         "characteristic_name": "Median total income of household in 2020 ($)",
@@ -1296,6 +1500,12 @@
         "characteristic_id": 250
     },
     {
+        "characteristic_name": "Total - Income statistics for private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 251,
+        "characteristic_id": 251
+    },
+    {
         "characteristic_name": "Average total income of household in 2020 ($)",
         "indentation": 2,
         "total_variable": 251,
@@ -1342,6 +1552,12 @@
         "indentation": 6,
         "total_variable": 251,
         "characteristic_id": 259
+    },
+    {
+        "characteristic_name": "Total - Household total income groups in 2020 for private households - 100% data",
+        "indentation": 0,
+        "total_variable": 260,
+        "characteristic_id": 260
     },
     {
         "characteristic_name": "Under $5,000",
@@ -1464,6 +1680,12 @@
         "characteristic_id": 280
     },
     {
+        "characteristic_name": "Total - Household after-tax income groups in 2020 for private households - 100% data",
+        "indentation": 0,
+        "total_variable": 281,
+        "characteristic_id": 281
+    },
+    {
         "characteristic_name": "Under $5,000",
         "indentation": 2,
         "total_variable": 281,
@@ -1578,6 +1800,12 @@
         "characteristic_id": 300
     },
     {
+        "characteristic_name": "Total - Income statistics for economic families in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 301,
+        "characteristic_id": 301
+    },
+    {
         "characteristic_name": "Median total income of economic family in 2020 ($)",
         "indentation": 2,
         "total_variable": 301,
@@ -1594,6 +1822,12 @@
         "indentation": 2,
         "total_variable": 301,
         "characteristic_id": 304
+    },
+    {
+        "characteristic_name": "Total - Income statistics for couple-only economic families in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 305,
+        "characteristic_id": 305
     },
     {
         "characteristic_name": "Median total income of couple-only economic families in 2020 ($)",
@@ -1614,6 +1848,12 @@
         "characteristic_id": 308
     },
     {
+        "characteristic_name": "Total - Income statistics for couple-with-children economic families in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 309,
+        "characteristic_id": 309
+    },
+    {
         "characteristic_name": "Median total income of couple-with-children economic families  in 2020 ($)",
         "indentation": 2,
         "total_variable": 309,
@@ -1630,6 +1870,12 @@
         "indentation": 2,
         "total_variable": 309,
         "characteristic_id": 312
+    },
+    {
+        "characteristic_name": "Total - Income statistics for one-parent economic families in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 313,
+        "characteristic_id": 313
     },
     {
         "characteristic_name": "Median total income of one-parent economic families in 2020 ($)",
@@ -1650,6 +1896,12 @@
         "characteristic_id": 316
     },
     {
+        "characteristic_name": "Total - Income statistics for persons aged 15 years and over not in economic families in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 317,
+        "characteristic_id": 317
+    },
+    {
         "characteristic_name": "Median total income in 2020 ($)",
         "indentation": 2,
         "total_variable": 317,
@@ -1660,6 +1912,12 @@
         "indentation": 2,
         "total_variable": 317,
         "characteristic_id": 319
+    },
+    {
+        "characteristic_name": "Total - Income statistics for economic families in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 320,
+        "characteristic_id": 320
     },
     {
         "characteristic_name": "Average total income of economic family in 2020 ($)",
@@ -1674,6 +1932,12 @@
         "characteristic_id": 322
     },
     {
+        "characteristic_name": "Total - Income statistics for couple-only economic families in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 323,
+        "characteristic_id": 323
+    },
+    {
         "characteristic_name": "Average total income of couple-only economic families in 2020 ($)",
         "indentation": 2,
         "total_variable": 323,
@@ -1684,6 +1948,12 @@
         "indentation": 2,
         "total_variable": 323,
         "characteristic_id": 325
+    },
+    {
+        "characteristic_name": "Total - Income statistics for couple-with-children economic families in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 326,
+        "characteristic_id": 326
     },
     {
         "characteristic_name": "Average total income of couple-with-children economic families in 2020 ($)",
@@ -1698,6 +1968,12 @@
         "characteristic_id": 328
     },
     {
+        "characteristic_name": "Total - Income statistics for one-parent economic families in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 329,
+        "characteristic_id": 329
+    },
+    {
         "characteristic_name": "Average total income of one-parent economic families in 2020 ($)",
         "indentation": 2,
         "total_variable": 329,
@@ -1710,6 +1986,12 @@
         "characteristic_id": 331
     },
     {
+        "characteristic_name": "Total - Income statistics for persons aged 15 years and over not in economic families in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 332,
+        "characteristic_id": 332
+    },
+    {
         "characteristic_name": "Average total income in 2020 ($)",
         "indentation": 2,
         "total_variable": 332,
@@ -1720,6 +2002,12 @@
         "indentation": 2,
         "total_variable": 332,
         "characteristic_id": 334
+    },
+    {
+        "characteristic_name": "Total - LIM low-income status in 2020 for the population in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 335,
+        "characteristic_id": 335
     },
     {
         "characteristic_name": "0 to 17 years",
@@ -1746,6 +2034,12 @@
         "characteristic_id": 339
     },
     {
+        "characteristic_name": "In low income based on the Low-income measure, after tax (LIM-AT)",
+        "indentation": 0,
+        "total_variable": 340,
+        "characteristic_id": 340
+    },
+    {
         "characteristic_name": "0 to 17 years",
         "indentation": 2,
         "total_variable": 340,
@@ -1768,6 +2062,12 @@
         "indentation": 2,
         "total_variable": 340,
         "characteristic_id": 344
+    },
+    {
+        "characteristic_name": "Prevalence of low income based on the Low-income measure, after tax (LIM-AT) (%)",
+        "indentation": 0,
+        "total_variable": 345,
+        "characteristic_id": 345
     },
     {
         "characteristic_name": "0 to 17 years (%)",
@@ -1794,6 +2094,12 @@
         "characteristic_id": 349
     },
     {
+        "characteristic_name": "Total - LICO low-income status in 2020 for the population in private households to whom the low-income concept is applicable - 100% data",
+        "indentation": 0,
+        "total_variable": 350,
+        "characteristic_id": 350
+    },
+    {
         "characteristic_name": "0 to 17 years",
         "indentation": 2,
         "total_variable": 350,
@@ -1816,6 +2122,12 @@
         "indentation": 2,
         "total_variable": 350,
         "characteristic_id": 354
+    },
+    {
+        "characteristic_name": "In low income based on the Low-income cut-offs, after tax (LICO-AT)",
+        "indentation": 0,
+        "total_variable": 355,
+        "characteristic_id": 355
     },
     {
         "characteristic_name": "0 to 17 years",
@@ -1842,6 +2154,12 @@
         "characteristic_id": 359
     },
     {
+        "characteristic_name": "Prevalence of low income based on the Low-income cut-offs, after tax (LICO-AT) (%)",
+        "indentation": 0,
+        "total_variable": 360,
+        "characteristic_id": 360
+    },
+    {
         "characteristic_name": "0 to 17 years (%)",
         "indentation": 2,
         "total_variable": 360,
@@ -1864,6 +2182,12 @@
         "indentation": 2,
         "total_variable": 360,
         "characteristic_id": 364
+    },
+    {
+        "characteristic_name": "Total - Adjusted after-tax economic family income decile group for the population in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 365,
+        "characteristic_id": 365
     },
     {
         "characteristic_name": "In bottom half of the distribution",
@@ -1938,6 +2262,12 @@
         "characteristic_id": 377
     },
     {
+        "characteristic_name": "Total - Inequality measures for the population in private households - 100% data",
+        "indentation": 0,
+        "total_variable": 378,
+        "characteristic_id": 378
+    },
+    {
         "characteristic_name": "Gini index on adjusted household total income",
         "indentation": 2,
         "total_variable": 378,
@@ -1960,6 +2290,12 @@
         "indentation": 2,
         "total_variable": 378,
         "characteristic_id": 382
+    },
+    {
+        "characteristic_name": "Total - Knowledge of official languages for the total population excluding institutional residents - 100% data",
+        "indentation": 0,
+        "total_variable": 383,
+        "characteristic_id": 383
     },
     {
         "characteristic_name": "English only",
@@ -1986,6 +2322,12 @@
         "characteristic_id": 387
     },
     {
+        "characteristic_name": "Total - First official language spoken for the total population excluding institutional residents - 100% data",
+        "indentation": 0,
+        "total_variable": 388,
+        "characteristic_id": 388
+    },
+    {
         "characteristic_name": "English",
         "indentation": 2,
         "total_variable": 388,
@@ -2008,6 +2350,12 @@
         "indentation": 2,
         "total_variable": 388,
         "characteristic_id": 392
+    },
+    {
+        "characteristic_name": "Total - Mother tongue for the total population excluding institutional residents - 100% data",
+        "indentation": 0,
+        "total_variable": 393,
+        "characteristic_id": 393
     },
     {
         "characteristic_name": "Single responses",
@@ -3990,6 +4338,12 @@
         "characteristic_id": 723
     },
     {
+        "characteristic_name": "Total - All languages spoken at home for the total population excluding institutional residents - 100% data",
+        "indentation": 0,
+        "total_variable": 724,
+        "characteristic_id": 724
+    },
+    {
         "characteristic_name": "English",
         "indentation": 2,
         "total_variable": 724,
@@ -4048,6 +4402,12 @@
         "indentation": 2,
         "total_variable": 724,
         "characteristic_id": 734
+    },
+    {
+        "characteristic_name": "Total - Language spoken most often at home for the total population excluding institutional residents - 100% data",
+        "indentation": 0,
+        "total_variable": 735,
+        "characteristic_id": 735
     },
     {
         "characteristic_name": "Single responses",
@@ -6030,6 +6390,12 @@
         "characteristic_id": 1065
     },
     {
+        "characteristic_name": "Total - Other language(s) spoken regularly at home for the total population excluding institutional residents - 100% data",
+        "indentation": 0,
+        "total_variable": 1066,
+        "characteristic_id": 1066
+    },
+    {
         "characteristic_name": "None",
         "indentation": 2,
         "total_variable": 1066,
@@ -6094,6 +6460,12 @@
         "indentation": 2,
         "total_variable": 1066,
         "characteristic_id": 1077
+    },
+    {
+        "characteristic_name": "Total - Knowledge of languages for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1078,
+        "characteristic_id": 1078
     },
     {
         "characteristic_name": "Official languages",
@@ -8034,6 +8406,12 @@
         "characteristic_id": 1401
     },
     {
+        "characteristic_name": "Total - Indigenous identity for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1402,
+        "characteristic_id": 1402
+    },
+    {
         "characteristic_name": "Indigenous identity",
         "indentation": 2,
         "total_variable": 1402,
@@ -8082,6 +8460,12 @@
         "characteristic_id": 1410
     },
     {
+        "characteristic_name": "Total - Registered or Treaty Indian status for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1411,
+        "characteristic_id": 1411
+    },
+    {
         "characteristic_name": "Registered or Treaty Indian",
         "indentation": 2,
         "total_variable": 1411,
@@ -8092,6 +8476,12 @@
         "indentation": 2,
         "total_variable": 1411,
         "characteristic_id": 1413
+    },
+    {
+        "characteristic_name": "Total - Private households by tenure - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1414,
+        "characteristic_id": 1414
     },
     {
         "characteristic_name": "Owner",
@@ -8112,6 +8502,12 @@
         "characteristic_id": 1417
     },
     {
+        "characteristic_name": "Total - Occupied private dwellings by condominium status - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1418,
+        "characteristic_id": 1418
+    },
+    {
         "characteristic_name": "Condominium",
         "indentation": 2,
         "total_variable": 1418,
@@ -8122,6 +8518,12 @@
         "indentation": 2,
         "total_variable": 1418,
         "characteristic_id": 1420
+    },
+    {
+        "characteristic_name": "Total - Occupied private dwellings by number of bedrooms - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1421,
+        "characteristic_id": 1421
     },
     {
         "characteristic_name": "No bedrooms",
@@ -8154,6 +8556,12 @@
         "characteristic_id": 1426
     },
     {
+        "characteristic_name": "Total - Occupied private dwellings by number of rooms - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1427,
+        "characteristic_id": 1427
+    },
+    {
         "characteristic_name": "1 to 4 rooms",
         "indentation": 2,
         "total_variable": 1427,
@@ -8184,6 +8592,18 @@
         "characteristic_id": 1432
     },
     {
+        "characteristic_name": "Average number of rooms per dwelling",
+        "indentation": 0,
+        "total_variable": 1433,
+        "characteristic_id": 1433
+    },
+    {
+        "characteristic_name": "Total - Private households by number of persons per room - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1434,
+        "characteristic_id": 1434
+    },
+    {
         "characteristic_name": "One person or fewer per room",
         "indentation": 2,
         "total_variable": 1434,
@@ -8196,6 +8616,12 @@
         "characteristic_id": 1436
     },
     {
+        "characteristic_name": "Total - Private households by housing suitability - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1437,
+        "characteristic_id": 1437
+    },
+    {
         "characteristic_name": "Suitable",
         "indentation": 2,
         "total_variable": 1437,
@@ -8206,6 +8632,12 @@
         "indentation": 2,
         "total_variable": 1437,
         "characteristic_id": 1439
+    },
+    {
+        "characteristic_name": "Total - Occupied private dwellings by period of construction - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1440,
+        "characteristic_id": 1440
     },
     {
         "characteristic_name": "1960 or before",
@@ -8256,6 +8688,12 @@
         "characteristic_id": 1448
     },
     {
+        "characteristic_name": "Total - Occupied private dwellings by dwelling condition - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1449,
+        "characteristic_id": 1449
+    },
+    {
         "characteristic_name": "Only regular maintenance and minor repairs needed",
         "indentation": 2,
         "total_variable": 1449,
@@ -8266,6 +8704,12 @@
         "indentation": 2,
         "total_variable": 1449,
         "characteristic_id": 1451
+    },
+    {
+        "characteristic_name": "Total - Private households by number of household maintainers - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1452,
+        "characteristic_id": 1452
     },
     {
         "characteristic_name": "One-maintainer household",
@@ -8284,6 +8728,12 @@
         "indentation": 2,
         "total_variable": 1452,
         "characteristic_id": 1455
+    },
+    {
+        "characteristic_name": "Total - Private households by age of primary household maintainers - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1456,
+        "characteristic_id": 1456
     },
     {
         "characteristic_name": "15 to 24 years",
@@ -8334,6 +8784,12 @@
         "characteristic_id": 1464
     },
     {
+        "characteristic_name": "Total - Owner and tenant households with household total income greater than zero, in non-farm, non-reserve private dwellings by shelter-cost-to-income ratio - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1465,
+        "characteristic_id": 1465
+    },
+    {
         "characteristic_name": "Spending less than 30% of income on shelter costs",
         "indentation": 2,
         "total_variable": 1465,
@@ -8350,6 +8806,12 @@
         "indentation": 4,
         "total_variable": 1465,
         "characteristic_id": 1468
+    },
+    {
+        "characteristic_name": "Total - Occupied private dwellings by housing indicators - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1469,
+        "characteristic_id": 1469
     },
     {
         "characteristic_name": "Total - Households 'spending 30% or more of income on shelter costs' or 'not suitable' or 'major repairs needed'",
@@ -8406,6 +8868,12 @@
         "characteristic_id": 1478
     },
     {
+        "characteristic_name": "Total - Owner and tenant households with household total income greater than zero and shelter-cost-to-income ratio less than 100%, in non-farm, non-reserve private dwellings - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1479,
+        "characteristic_id": 1479
+    },
+    {
         "characteristic_name": "In core need",
         "indentation": 2,
         "total_variable": 1479,
@@ -8416,6 +8884,12 @@
         "indentation": 2,
         "total_variable": 1479,
         "characteristic_id": 1481
+    },
+    {
+        "characteristic_name": "Total - Owner households in non-farm, non-reserve private dwellings - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1482,
+        "characteristic_id": 1482
     },
     {
         "characteristic_name": "% of owner households with a mortgage",
@@ -8460,6 +8934,12 @@
         "characteristic_id": 1489
     },
     {
+        "characteristic_name": "Total - Tenant households in non-farm, non-reserve private dwellings - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1490,
+        "characteristic_id": 1490
+    },
+    {
         "characteristic_name": "% of tenant households in subsidized housing",
         "indentation": 2,
         "total_variable": 1490,
@@ -8490,6 +8970,12 @@
         "characteristic_id": 1495
     },
     {
+        "characteristic_name": "Total - Households living in a dwelling provided by the local government, First Nation or Indian band in non-farm private dwellings - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1496,
+        "characteristic_id": 1496
+    },
+    {
         "characteristic_name": "% of households living in a dwelling provided by the local government, First Nation or Indian band spending more than 30% on shelter costs",
         "indentation": 2,
         "total_variable": 1496,
@@ -8506,6 +8992,12 @@
         "indentation": 2,
         "total_variable": 1496,
         "characteristic_id": 1499
+    },
+    {
+        "characteristic_name": "Total - Indigenous ancestry for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1500,
+        "characteristic_id": 1500
     },
     {
         "characteristic_name": "Indigenous ancestry (only)",
@@ -8634,6 +9126,12 @@
         "characteristic_id": 1521
     },
     {
+        "characteristic_name": "Total - Citizenship for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1522,
+        "characteristic_id": 1522
+    },
+    {
         "characteristic_name": "Canadian citizens",
         "indentation": 2,
         "total_variable": 1522,
@@ -8656,6 +9154,12 @@
         "indentation": 2,
         "total_variable": 1522,
         "characteristic_id": 1526
+    },
+    {
+        "characteristic_name": "Total - Immigrant status and period of immigration for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1527,
+        "characteristic_id": 1527
     },
     {
         "characteristic_name": "Non-immigrants",
@@ -8718,6 +9222,12 @@
         "characteristic_id": 1537
     },
     {
+        "characteristic_name": "Total - Age at immigration for the immigrant population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1538,
+        "characteristic_id": 1538
+    },
+    {
         "characteristic_name": "Under 5 years",
         "indentation": 2,
         "total_variable": 1538,
@@ -8746,6 +9256,12 @@
         "indentation": 2,
         "total_variable": 1538,
         "characteristic_id": 1543
+    },
+    {
+        "characteristic_name": "Total - Place of birth for the immigrant population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1544,
+        "characteristic_id": 1544
     },
     {
         "characteristic_name": "Americas",
@@ -9100,6 +9616,12 @@
         "indentation": 2,
         "total_variable": 1544,
         "characteristic_id": 1603
+    },
+    {
+        "characteristic_name": "Total - Place of birth for the recent immigrant population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1604,
+        "characteristic_id": 1604
     },
     {
         "characteristic_name": "Americas",
@@ -9462,6 +9984,12 @@
         "characteristic_id": 1664
     },
     {
+        "characteristic_name": "Total - Generation status for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1665,
+        "characteristic_id": 1665
+    },
+    {
         "characteristic_name": "First generation",
         "indentation": 2,
         "total_variable": 1665,
@@ -9478,6 +10006,12 @@
         "indentation": 2,
         "total_variable": 1665,
         "characteristic_id": 1668
+    },
+    {
+        "characteristic_name": "Total - Admission category and applicant type for the immigrant population in private households who were admitted between 1980 and 2021 - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1669,
+        "characteristic_id": 1669
     },
     {
         "characteristic_name": "Economic immigrants",
@@ -9516,6 +10050,12 @@
         "characteristic_id": 1675
     },
     {
+        "characteristic_name": "Total - Pre-admission experience for the immigrant population in private households who were admitted between 1980 and 2021 - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1676,
+        "characteristic_id": 1676
+    },
+    {
         "characteristic_name": "Asylum claim before admission",
         "indentation": 2,
         "total_variable": 1676,
@@ -9550,6 +10090,12 @@
         "indentation": 2,
         "total_variable": 1676,
         "characteristic_id": 1682
+    },
+    {
+        "characteristic_name": "Total - Visible minority for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1683,
+        "characteristic_id": 1683
     },
     {
         "characteristic_name": "Total visible minority population",
@@ -9634,6 +10180,12 @@
         "indentation": 2,
         "total_variable": 1683,
         "characteristic_id": 1697
+    },
+    {
+        "characteristic_name": "Total - Ethnic or cultural origin for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1698,
+        "characteristic_id": 1698
     },
     {
         "characteristic_name": "Canadian",
@@ -11136,6 +11688,12 @@
         "characteristic_id": 1948
     },
     {
+        "characteristic_name": "Total - Religion for the population in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1949,
+        "characteristic_id": 1949
+    },
+    {
         "characteristic_name": "Buddhist",
         "indentation": 2,
         "total_variable": 1949,
@@ -11280,6 +11838,12 @@
         "characteristic_id": 1973
     },
     {
+        "characteristic_name": "Total - Mobility status 1 year ago - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1974,
+        "characteristic_id": 1974
+    },
+    {
         "characteristic_name": "Non-movers",
         "indentation": 2,
         "total_variable": 1974,
@@ -11326,6 +11890,12 @@
         "indentation": 6,
         "total_variable": 1974,
         "characteristic_id": 1982
+    },
+    {
+        "characteristic_name": "Total - Mobility status 5 years ago - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1983,
+        "characteristic_id": 1983
     },
     {
         "characteristic_name": "Non-movers",
@@ -11376,6 +11946,12 @@
         "characteristic_id": 1991
     },
     {
+        "characteristic_name": "Total - Secondary (high) school diploma or equivalency certificate for the population aged 15 years and over in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1992,
+        "characteristic_id": 1992
+    },
+    {
         "characteristic_name": "No high school diploma or equivalency certificate",
         "indentation": 2,
         "total_variable": 1992,
@@ -11388,6 +11964,12 @@
         "characteristic_id": 1994
     },
     {
+        "characteristic_name": "Total - Secondary (high) school diploma or equivalency certificate for the population aged 25 to 64 years in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1995,
+        "characteristic_id": 1995
+    },
+    {
         "characteristic_name": "No high school diploma or equivalency certificate",
         "indentation": 2,
         "total_variable": 1995,
@@ -11398,6 +11980,12 @@
         "indentation": 2,
         "total_variable": 1995,
         "characteristic_id": 1997
+    },
+    {
+        "characteristic_name": "Total - Highest certificate, diploma or degree for the population aged 15 years and over in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 1998,
+        "characteristic_id": 1998
     },
     {
         "characteristic_name": "No certificate, diploma or degree",
@@ -11490,6 +12078,12 @@
         "characteristic_id": 2013
     },
     {
+        "characteristic_name": "Total - Highest certificate, diploma or degree for the population aged 25 to 64 years in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2014,
+        "characteristic_id": 2014
+    },
+    {
         "characteristic_name": "No certificate, diploma or degree",
         "indentation": 2,
         "total_variable": 2014,
@@ -11578,6 +12172,12 @@
         "indentation": 6,
         "total_variable": 2014,
         "characteristic_id": 2029
+    },
+    {
+        "characteristic_name": "Total - Major field of study - Classification of Instructional Programs (CIP) 2021 for the population aged 15 years and over in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2030,
+        "characteristic_id": 2030
     },
     {
         "characteristic_name": "No postsecondary certificate, diploma or degree",
@@ -11952,6 +12552,12 @@
         "characteristic_id": 2092
     },
     {
+        "characteristic_name": "Total - Major field of study - Classification of Instructional Programs (CIP) 2021 for the population aged 25 to 64 years in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2093,
+        "characteristic_id": 2093
+    },
+    {
         "characteristic_name": "No postsecondary certificate, diploma or degree",
         "indentation": 2,
         "total_variable": 2093,
@@ -12322,6 +12928,12 @@
         "indentation": 2,
         "total_variable": 2093,
         "characteristic_id": 2155
+    },
+    {
+        "characteristic_name": "Total - Location of study compared with province or territory of residence for the population aged 25 to 64 years in private households - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2156,
+        "characteristic_id": 2156
     },
     {
         "characteristic_name": "No postsecondary certificate, diploma or degree",
@@ -12720,6 +13332,12 @@
         "characteristic_id": 2222
     },
     {
+        "characteristic_name": "Total - Population aged 15 years and over by labour force status - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2223,
+        "characteristic_id": 2223
+    },
+    {
         "characteristic_name": "In the labour force",
         "indentation": 2,
         "total_variable": 2223,
@@ -12742,6 +13360,30 @@
         "indentation": 2,
         "total_variable": 2223,
         "characteristic_id": 2227
+    },
+    {
+        "characteristic_name": "Participation rate",
+        "indentation": 0,
+        "total_variable": 2228,
+        "characteristic_id": 2228
+    },
+    {
+        "characteristic_name": "Employment rate",
+        "indentation": 0,
+        "total_variable": 2229,
+        "characteristic_id": 2229
+    },
+    {
+        "characteristic_name": "Unemployment rate",
+        "indentation": 0,
+        "total_variable": 2230,
+        "characteristic_id": 2230
+    },
+    {
+        "characteristic_name": "Total - Population aged 15 years and over by work activity during the reference year - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2231,
+        "characteristic_id": 2231
     },
     {
         "characteristic_name": "Did not work",
@@ -12772,6 +13414,12 @@
         "indentation": 4,
         "total_variable": 2231,
         "characteristic_id": 2236
+    },
+    {
+        "characteristic_name": "Total - Labour force aged 15 years and over by class of worker including job permanency - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2237,
+        "characteristic_id": 2237
     },
     {
         "characteristic_name": "Class of worker - not applicable",
@@ -12820,6 +13468,12 @@
         "indentation": 4,
         "total_variable": 2237,
         "characteristic_id": 2245
+    },
+    {
+        "characteristic_name": "Total - Labour force aged 15 years and over by occupation - Broad category - National Occupational Classification (NOC) 2021 - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2246,
+        "characteristic_id": 2246
     },
     {
         "characteristic_name": "Occupation - not applicable",
@@ -12892,6 +13546,12 @@
         "indentation": 4,
         "total_variable": 2246,
         "characteristic_id": 2258
+    },
+    {
+        "characteristic_name": "Total - Labour force aged 15 years and over by industry - Sectors - North American Industry Classification System (NAICS) 2017 - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2259,
+        "characteristic_id": 2259
     },
     {
         "characteristic_name": "Industry - not applicable",
@@ -13026,6 +13686,12 @@
         "characteristic_id": 2281
     },
     {
+        "characteristic_name": "Total - All languages used at work for the population in private households aged 15 years and over who worked since January 1, 2020 - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2282,
+        "characteristic_id": 2282
+    },
+    {
         "characteristic_name": "English",
         "indentation": 2,
         "total_variable": 2282,
@@ -13084,6 +13750,12 @@
         "indentation": 2,
         "total_variable": 2282,
         "characteristic_id": 2292
+    },
+    {
+        "characteristic_name": "Total - Language used most often at work for the population aged 15 years and over who worked since January 1, 2020, in private households, 2021 Census - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2293,
+        "characteristic_id": 2293
     },
     {
         "characteristic_name": "Single responses",
@@ -14808,6 +15480,12 @@
         "characteristic_id": 2580
     },
     {
+        "characteristic_name": "Total - Other language(s) used regularly at work for the population in private households aged 15 years and over who worked since January 1, 2020 - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2581,
+        "characteristic_id": 2581
+    },
+    {
         "characteristic_name": "None",
         "indentation": 2,
         "total_variable": 2581,
@@ -14874,6 +15552,12 @@
         "characteristic_id": 2592
     },
     {
+        "characteristic_name": "Total - Place of work status for the employed labour force aged 15 years and over - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2593,
+        "characteristic_id": 2593
+    },
+    {
         "characteristic_name": "Worked at home",
         "indentation": 2,
         "total_variable": 2593,
@@ -14898,6 +15582,12 @@
         "characteristic_id": 2597
     },
     {
+        "characteristic_name": "Total - Commuting destination for the employed labour force aged 15 years and over with a usual place of work - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2598,
+        "characteristic_id": 2598
+    },
+    {
         "characteristic_name": "Commute within census subdivision (CSD) of residence",
         "indentation": 2,
         "total_variable": 2598,
@@ -14920,6 +15610,12 @@
         "indentation": 2,
         "total_variable": 2598,
         "characteristic_id": 2602
+    },
+    {
+        "characteristic_name": "Total - Main mode of commuting for the employed labour force aged 15 years and over with a usual place of work or no fixed workplace address - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2603,
+        "characteristic_id": 2603
     },
     {
         "characteristic_name": "Car, truck or van",
@@ -14964,6 +15660,12 @@
         "characteristic_id": 2610
     },
     {
+        "characteristic_name": "Total - Commuting duration for the employed labour force aged 15 years and over with a usual place of work or no fixed workplace address - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2611,
+        "characteristic_id": 2611
+    },
+    {
         "characteristic_name": "Less than 15 minutes",
         "indentation": 2,
         "total_variable": 2611,
@@ -14992,6 +15694,12 @@
         "indentation": 2,
         "total_variable": 2611,
         "characteristic_id": 2616
+    },
+    {
+        "characteristic_name": "Total - Time leaving for work for the employed labour force aged 15 years and over with a usual place of work or no fixed workplace address - 25% sample data",
+        "indentation": 0,
+        "total_variable": 2617,
+        "characteristic_id": 2617
     },
     {
         "characteristic_name": "Between 5 a.m. and 5:59 a.m.",
@@ -15030,6 +15738,12 @@
         "characteristic_id": 2623
     },
     {
+        "characteristic_name": "Total - Eligibility for instruction in the minority official language for the population in private households born in 2003 or later - 100% data",
+        "indentation": 0,
+        "total_variable": 2624,
+        "characteristic_id": 2624
+    },
+    {
         "characteristic_name": "Children eligible for instruction in the minority official language",
         "indentation": 2,
         "total_variable": 2624,
@@ -15040,6 +15754,12 @@
         "indentation": 2,
         "total_variable": 2624,
         "characteristic_id": 2626
+    },
+    {
+        "characteristic_name": "Total - Eligibility and instruction in the minority official language, for the population in private households born between 2003 and 2015 (inclusive) - 100% data",
+        "indentation": 0,
+        "total_variable": 2627,
+        "characteristic_id": 2627
     },
     {
         "characteristic_name": "Children eligible for instruction in the minority official language",
