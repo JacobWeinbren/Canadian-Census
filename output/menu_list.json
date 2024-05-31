@@ -6,16 +6,6 @@
             "divisor": null
         },
         {
-            "id": 2,
-            "name": "Population, 2016",
-            "divisor": null
-        },
-        {
-            "id": 3,
-            "name": "Population percentage change, 2016 to 2021",
-            "divisor": null
-        },
-        {
             "id": 4,
             "name": "Total private dwellings",
             "divisor": null
@@ -1801,7 +1791,7 @@
         },
         {
             "id": 382,
-            "name": "P90/P10 ratio on adjusted household after-tax income",
+            "name": "P90\/P10 ratio on adjusted household after-tax income",
             "divisor": 378
         }
     ],
@@ -2006,11 +1996,6 @@
             "divisor": 393
         },
         {
-            "id": 425,
-            "name": "Algonquian languages, n.i.e.",
-            "divisor": 393
-        },
-        {
             "id": 426,
             "name": "Athabaskan languages",
             "divisor": 393
@@ -2171,11 +2156,6 @@
             "divisor": 393
         },
         {
-            "id": 458,
-            "name": "Cayuga",
-            "divisor": 393
-        },
-        {
             "id": 459,
             "name": "Mohawk",
             "divisor": 393
@@ -2183,11 +2163,6 @@
         {
             "id": 460,
             "name": "Oneida",
-            "divisor": 393
-        },
-        {
-            "id": 461,
-            "name": "Iroquoian languages, n.i.e.",
             "divisor": 393
         },
         {
@@ -3710,11 +3685,6 @@
             "divisor": 735
         },
         {
-            "id": 767,
-            "name": "Algonquian languages, n.i.e.",
-            "divisor": 735
-        },
-        {
             "id": 768,
             "name": "Athabaskan languages",
             "divisor": 735
@@ -3765,38 +3735,13 @@
             "divisor": 735
         },
         {
-            "id": 778,
-            "name": "Tahltan languages",
-            "divisor": 735
-        },
-        {
-            "id": 779,
-            "name": "Kaska (Nahani)",
-            "divisor": 735
-        },
-        {
-            "id": 780,
-            "name": "Tahltan",
-            "divisor": 735
-        },
-        {
             "id": 781,
             "name": "Tlicho (Dogrib)",
             "divisor": 735
         },
         {
-            "id": 782,
-            "name": "Tse'khene (Sekani)",
-            "divisor": 735
-        },
-        {
             "id": 783,
             "name": "Tsilhqot'in (Chilcotin)",
-            "divisor": 735
-        },
-        {
-            "id": 784,
-            "name": "Tsuu T'ina (Sarsi)",
             "divisor": 735
         },
         {
@@ -3810,33 +3755,8 @@
             "divisor": 735
         },
         {
-            "id": 787,
-            "name": "Southern Tutchone",
-            "divisor": 735
-        },
-        {
-            "id": 788,
-            "name": "Tutchone, n.o.s.",
-            "divisor": 735
-        },
-        {
             "id": 789,
             "name": "Wetsuwet'en-Babine",
-            "divisor": 735
-        },
-        {
-            "id": 790,
-            "name": "Tlingit",
-            "divisor": 735
-        },
-        {
-            "id": 791,
-            "name": "Athabaskan languages, n.i.e.",
-            "divisor": 735
-        },
-        {
-            "id": 792,
-            "name": "Haida",
             "divisor": 735
         },
         {
@@ -3865,11 +3785,6 @@
             "divisor": 735
         },
         {
-            "id": 798,
-            "name": "Inuktut (Inuit) languages, n.i.e.",
-            "divisor": 735
-        },
-        {
             "id": 799,
             "name": "Iroquoian languages",
             "divisor": 735
@@ -3882,21 +3797,6 @@
         {
             "id": 801,
             "name": "Mohawk",
-            "divisor": 735
-        },
-        {
-            "id": 802,
-            "name": "Oneida",
-            "divisor": 735
-        },
-        {
-            "id": 803,
-            "name": "Iroquoian languages, n.i.e.",
-            "divisor": 735
-        },
-        {
-            "id": 804,
-            "name": "Ktunaxa (Kutenai)",
             "divisor": 735
         },
         {
@@ -3930,11 +3830,6 @@
             "divisor": 735
         },
         {
-            "id": 811,
-            "name": "Squamish",
-            "divisor": 735
-        },
-        {
             "id": 812,
             "name": "Straits",
             "divisor": 735
@@ -3942,11 +3837,6 @@
         {
             "id": 813,
             "name": "Syilx (Okanagan)",
-            "divisor": 735
-        },
-        {
-            "id": 814,
-            "name": "Salish languages, n.i.e.",
             "divisor": 735
         },
         {
@@ -3970,11 +3860,6 @@
             "divisor": 735
         },
         {
-            "id": 819,
-            "name": "Siouan languages, n.i.e.",
-            "divisor": 735
-        },
-        {
             "id": 820,
             "name": "Tsimshian languages",
             "divisor": 735
@@ -3990,23 +3875,8 @@
             "divisor": 735
         },
         {
-            "id": 823,
-            "name": "Tsimshian",
-            "divisor": 735
-        },
-        {
             "id": 824,
             "name": "Wakashan languages",
-            "divisor": 735
-        },
-        {
-            "id": 825,
-            "name": "Haisla",
-            "divisor": 735
-        },
-        {
-            "id": 826,
-            "name": "Heiltsuk",
             "divisor": 735
         },
         {
@@ -4017,11 +3887,6 @@
         {
             "id": 828,
             "name": "Nuu-chah-nulth (Nootka)",
-            "divisor": 735
-        },
-        {
-            "id": 829,
-            "name": "Wakashan languages, n.i.e.",
             "divisor": 735
         },
         {
@@ -4770,11 +4635,6 @@
             "divisor": 735
         },
         {
-            "id": 979,
-            "name": "Indo-Iranian languages, n.i.e.",
-            "divisor": 735
-        },
-        {
             "id": 980,
             "name": "Italic (Romance) languages",
             "divisor": 735
@@ -4870,11 +4730,6 @@
             "divisor": 735
         },
         {
-            "id": 999,
-            "name": "Gikuyu",
-            "divisor": 735
-        },
-        {
             "id": 1000,
             "name": "Igbo",
             "divisor": 735
@@ -4897,11 +4752,6 @@
         {
             "id": 1004,
             "name": "Mòoré",
-            "divisor": 735
-        },
-        {
-            "id": 1005,
-            "name": "Mwani",
             "divisor": 735
         },
         {
@@ -5499,11 +5349,6 @@
             "divisor": 1078
         },
         {
-            "id": 1126,
-            "name": "Tsuu T'ina (Sarsi)",
-            "divisor": 1078
-        },
-        {
             "id": 1127,
             "name": "Tutchone languages",
             "divisor": 1078
@@ -5721,11 +5566,6 @@
         {
             "id": 1170,
             "name": "Nuu-chah-nulth (Nootka)",
-            "divisor": 1078
-        },
-        {
-            "id": 1171,
-            "name": "Wakashan languages, n.i.e.",
             "divisor": 1078
         },
         {
@@ -6056,11 +5896,6 @@
         {
             "id": 1237,
             "name": "Tulu",
-            "divisor": 1078
-        },
-        {
-            "id": 1238,
-            "name": "Dravidian languages, n.i.e.",
             "divisor": 1078
         },
         {
@@ -8668,7 +8503,7 @@
         },
         {
             "id": 1778,
-            "name": "Trinidadian/Tobagonian",
+            "name": "Trinidadian\/Tobagonian",
             "divisor": 1698
         },
         {
@@ -8948,7 +8783,7 @@
         },
         {
             "id": 1834,
-            "name": "Innu/Montagnais, n.o.s.",
+            "name": "Innu\/Montagnais, n.o.s.",
             "divisor": 1698
         },
         {
@@ -9929,7 +9764,7 @@
         },
         {
             "id": 2035,
-            "name": "10. Communications technologies/technicians and support services",
+            "name": "10. Communications technologies\/technicians and support services",
             "divisor": 2030
         },
         {
@@ -9949,7 +9784,7 @@
         },
         {
             "id": 2039,
-            "name": "23. English language and literature/letters",
+            "name": "23. English language and literature\/letters",
             "divisor": 2030
         },
         {
@@ -9979,7 +9814,7 @@
         },
         {
             "id": 2045,
-            "name": "55. French language and literature/lettersCAN",
+            "name": "55. French language and literature\/lettersCAN",
             "divisor": 2030
         },
         {
@@ -9999,7 +9834,7 @@
         },
         {
             "id": 2049,
-            "name": "19. Family and consumer sciences/human sciences",
+            "name": "19. Family and consumer sciences\/human sciences",
             "divisor": 2030
         },
         {
@@ -10069,7 +9904,7 @@
         },
         {
             "id": 2063,
-            "name": "41. Science technologies/technicians",
+            "name": "41. Science technologies\/technicians",
             "divisor": 2030
         },
         {
@@ -10114,12 +9949,7 @@
         },
         {
             "id": 2072,
-            "name": "15. Engineering/engineering-related technologies/technicians",
-            "divisor": 2030
-        },
-        {
-            "id": 2073,
-            "name": "30.12 Historic preservation and conservation",
+            "name": "15. Engineering\/engineering-related technologies\/technicians",
             "divisor": 2030
         },
         {
@@ -10129,7 +9959,7 @@
         },
         {
             "id": 2075,
-            "name": "47. Mechanic and repair technologies/technicians",
+            "name": "47. Mechanic and repair technologies\/technicians",
             "divisor": 2030
         },
         {
@@ -10144,7 +9974,7 @@
         },
         {
             "id": 2078,
-            "name": "01. Agricultural and veterinary sciences/services/operations and related fields",
+            "name": "01. Agricultural and veterinary sciences\/services\/operations and related fields",
             "divisor": 2030
         },
         {
@@ -10155,11 +9985,6 @@
         {
             "id": 2080,
             "name": "Health and related fields",
-            "divisor": 2030
-        },
-        {
-            "id": 2081,
-            "name": "30.37 Design for human health",
             "divisor": 2030
         },
         {
@@ -10174,12 +9999,12 @@
         },
         {
             "id": 2084,
-            "name": "60. Health professions residency/fellowship programs",
+            "name": "60. Health professions residency\/fellowship programs",
             "divisor": 2030
         },
         {
             "id": 2085,
-            "name": "61. Medical residency/fellowship programs",
+            "name": "61. Medical residency\/fellowship programs",
             "divisor": 2030
         },
         {
@@ -10241,7 +10066,7 @@
         },
         {
             "id": 2098,
-            "name": "10. Communications technologies/technicians and support services",
+            "name": "10. Communications technologies\/technicians and support services",
             "divisor": 2093
         },
         {
@@ -10261,7 +10086,7 @@
         },
         {
             "id": 2102,
-            "name": "23. English language and literature/letters",
+            "name": "23. English language and literature\/letters",
             "divisor": 2093
         },
         {
@@ -10291,7 +10116,7 @@
         },
         {
             "id": 2108,
-            "name": "55. French language and literature/lettersCAN",
+            "name": "55. French language and literature\/lettersCAN",
             "divisor": 2093
         },
         {
@@ -10311,7 +10136,7 @@
         },
         {
             "id": 2112,
-            "name": "19. Family and consumer sciences/human sciences",
+            "name": "19. Family and consumer sciences\/human sciences",
             "divisor": 2093
         },
         {
@@ -10381,7 +10206,7 @@
         },
         {
             "id": 2126,
-            "name": "41. Science technologies/technicians",
+            "name": "41. Science technologies\/technicians",
             "divisor": 2093
         },
         {
@@ -10426,12 +10251,7 @@
         },
         {
             "id": 2135,
-            "name": "15. Engineering/engineering-related technologies/technicians",
-            "divisor": 2093
-        },
-        {
-            "id": 2136,
-            "name": "30.12 Historic preservation and conservation",
+            "name": "15. Engineering\/engineering-related technologies\/technicians",
             "divisor": 2093
         },
         {
@@ -10441,7 +10261,7 @@
         },
         {
             "id": 2138,
-            "name": "47. Mechanic and repair technologies/technicians",
+            "name": "47. Mechanic and repair technologies\/technicians",
             "divisor": 2093
         },
         {
@@ -10456,7 +10276,7 @@
         },
         {
             "id": 2141,
-            "name": "01. Agricultural and veterinary sciences/services/operations and related fields",
+            "name": "01. Agricultural and veterinary sciences\/services\/operations and related fields",
             "divisor": 2093
         },
         {
@@ -10467,11 +10287,6 @@
         {
             "id": 2143,
             "name": "Health and related fields",
-            "divisor": 2093
-        },
-        {
-            "id": 2144,
-            "name": "30.37 Design for human health",
             "divisor": 2093
         },
         {
@@ -10486,12 +10301,12 @@
         },
         {
             "id": 2147,
-            "name": "60. Health professions residency/fellowship programs",
+            "name": "60. Health professions residency\/fellowship programs",
             "divisor": 2093
         },
         {
             "id": 2148,
-            "name": "61. Medical residency/fellowship programs",
+            "name": "61. Medical residency\/fellowship programs",
             "divisor": 2093
         },
         {
@@ -10902,7 +10717,7 @@
         },
         {
             "id": 2235,
-            "name": "Worked part year and/or part time",
+            "name": "Worked part year and\/or part time",
             "divisor": 2231
         },
         {
@@ -11236,11 +11051,6 @@
             "divisor": 2293
         },
         {
-            "id": 2305,
-            "name": "Ililimowin (Moose Cree)",
-            "divisor": 2293
-        },
-        {
             "id": 2306,
             "name": "Inu Ayimun (Southern East Cree)",
             "divisor": 2293
@@ -11321,11 +11131,6 @@
             "divisor": 2293
         },
         {
-            "id": 2322,
-            "name": "Daawaamwin (Odawa)",
-            "divisor": 2293
-        },
-        {
             "id": 2323,
             "name": "Saulteau (Western Ojibway)",
             "divisor": 2293
@@ -11333,11 +11138,6 @@
         {
             "id": 2324,
             "name": "Ojibway, n.o.s.",
-            "divisor": 2293
-        },
-        {
-            "id": 2325,
-            "name": "Algonquian languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -11356,18 +11156,8 @@
             "divisor": 2293
         },
         {
-            "id": 2329,
-            "name": "Dane-zaa (Beaver)",
-            "divisor": 2293
-        },
-        {
             "id": 2330,
             "name": "Dene, n.o.s.",
-            "divisor": 2293
-        },
-        {
-            "id": 2331,
-            "name": "Gwich'in",
             "divisor": 2293
         },
         {
@@ -11401,58 +11191,8 @@
             "divisor": 2293
         },
         {
-            "id": 2338,
-            "name": "Tse'khene (Sekani)",
-            "divisor": 2293
-        },
-        {
             "id": 2339,
             "name": "Tsilhqot'in (Chilcotin)",
-            "divisor": 2293
-        },
-        {
-            "id": 2340,
-            "name": "Tsuu T'ina (Sarsi)",
-            "divisor": 2293
-        },
-        {
-            "id": 2341,
-            "name": "Tutchone languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2342,
-            "name": "Northern Tutchone",
-            "divisor": 2293
-        },
-        {
-            "id": 2343,
-            "name": "Southern Tutchone",
-            "divisor": 2293
-        },
-        {
-            "id": 2344,
-            "name": "Tutchone, n.o.s.",
-            "divisor": 2293
-        },
-        {
-            "id": 2345,
-            "name": "Wetsuwet'en-Babine",
-            "divisor": 2293
-        },
-        {
-            "id": 2346,
-            "name": "Tlingit",
-            "divisor": 2293
-        },
-        {
-            "id": 2347,
-            "name": "Athabaskan languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2348,
-            "name": "Haida",
             "divisor": 2293
         },
         {
@@ -11461,28 +11201,8 @@
             "divisor": 2293
         },
         {
-            "id": 2350,
-            "name": "Inuinnaqtun (Inuvialuktun)",
-            "divisor": 2293
-        },
-        {
-            "id": 2351,
-            "name": "Inuinnaqtun",
-            "divisor": 2293
-        },
-        {
-            "id": 2352,
-            "name": "Inuvialuktun",
-            "divisor": 2293
-        },
-        {
             "id": 2353,
             "name": "Inuktitut",
-            "divisor": 2293
-        },
-        {
-            "id": 2354,
-            "name": "Inuktut (Inuit) languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -11496,26 +11216,6 @@
             "divisor": 2293
         },
         {
-            "id": 2357,
-            "name": "Oneida",
-            "divisor": 2293
-        },
-        {
-            "id": 2358,
-            "name": "Iroquoian languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2359,
-            "name": "Ktunaxa (Kutenai)",
-            "divisor": 2293
-        },
-        {
-            "id": 2360,
-            "name": "Michif",
-            "divisor": 2293
-        },
-        {
             "id": 2361,
             "name": "Salish languages",
             "divisor": 2293
@@ -11526,28 +11226,8 @@
             "divisor": 2293
         },
         {
-            "id": 2363,
-            "name": "Lillooet",
-            "divisor": 2293
-        },
-        {
-            "id": 2364,
-            "name": "Ntlakapamux (Thompson)",
-            "divisor": 2293
-        },
-        {
             "id": 2365,
             "name": "Secwepemctsin (Shuswap)",
-            "divisor": 2293
-        },
-        {
-            "id": 2366,
-            "name": "Squamish",
-            "divisor": 2293
-        },
-        {
-            "id": 2367,
-            "name": "Straits",
             "divisor": 2293
         },
         {
@@ -11556,33 +11236,8 @@
             "divisor": 2293
         },
         {
-            "id": 2369,
-            "name": "Salish languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2370,
             "name": "Siouan languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2371,
-            "name": "Assiniboine",
-            "divisor": 2293
-        },
-        {
-            "id": 2372,
-            "name": "Dakota",
-            "divisor": 2293
-        },
-        {
-            "id": 2373,
-            "name": "Stoney",
-            "divisor": 2293
-        },
-        {
-            "id": 2374,
-            "name": "Siouan languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -11596,11 +11251,6 @@
             "divisor": 2293
         },
         {
-            "id": 2377,
-            "name": "Nisga'a",
-            "divisor": 2293
-        },
-        {
             "id": 2378,
             "name": "Tsimshian",
             "divisor": 2293
@@ -11611,38 +11261,13 @@
             "divisor": 2293
         },
         {
-            "id": 2380,
-            "name": "Haisla",
-            "divisor": 2293
-        },
-        {
             "id": 2381,
             "name": "Heiltsuk",
             "divisor": 2293
         },
         {
-            "id": 2382,
-            "name": "Kwak'wala (Kwakiutl)",
-            "divisor": 2293
-        },
-        {
             "id": 2383,
             "name": "Nuu-chah-nulth (Nootka)",
-            "divisor": 2293
-        },
-        {
-            "id": 2384,
-            "name": "Wakashan languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2385,
-            "name": "Indigenous languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2386,
-            "name": "Indigenous languages, n.o.s.",
             "divisor": 2293
         },
         {
@@ -11656,58 +11281,13 @@
             "divisor": 2293
         },
         {
-            "id": 2389,
-            "name": "Berber languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2390,
-            "name": "Kabyle",
-            "divisor": 2293
-        },
-        {
-            "id": 2391,
-            "name": "Tamazight",
-            "divisor": 2293
-        },
-        {
-            "id": 2392,
-            "name": "Berber languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2393,
-            "name": "Chadic languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2394,
-            "name": "Coptic",
-            "divisor": 2293
-        },
-        {
             "id": 2395,
             "name": "Cushitic languages",
             "divisor": 2293
         },
         {
-            "id": 2396,
-            "name": "Bilen",
-            "divisor": 2293
-        },
-        {
-            "id": 2397,
-            "name": "Oromo",
-            "divisor": 2293
-        },
-        {
             "id": 2398,
             "name": "Somali",
-            "divisor": 2293
-        },
-        {
-            "id": 2399,
-            "name": "Cushitic languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -11741,11 +11321,6 @@
             "divisor": 2293
         },
         {
-            "id": 2406,
-            "name": "Aramaic, n.o.s.",
-            "divisor": 2293
-        },
-        {
             "id": 2407,
             "name": "Hebrew",
             "divisor": 2293
@@ -11753,11 +11328,6 @@
         {
             "id": 2408,
             "name": "Tigrigna",
-            "divisor": 2293
-        },
-        {
-            "id": 2409,
-            "name": "Semitic languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -11776,78 +11346,13 @@
             "divisor": 2293
         },
         {
-            "id": 2413,
-            "name": "Austro-Asiatic languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2414,
             "name": "Austronesian languages",
             "divisor": 2293
         },
         {
-            "id": 2415,
-            "name": "Bikol",
-            "divisor": 2293
-        },
-        {
-            "id": 2416,
-            "name": "Bisaya, n.o.s.",
-            "divisor": 2293
-        },
-        {
-            "id": 2417,
-            "name": "Cebuano",
-            "divisor": 2293
-        },
-        {
-            "id": 2418,
-            "name": "Hiligaynon",
-            "divisor": 2293
-        },
-        {
-            "id": 2419,
-            "name": "Ilocano",
-            "divisor": 2293
-        },
-        {
-            "id": 2420,
-            "name": "Indonesian",
-            "divisor": 2293
-        },
-        {
-            "id": 2421,
-            "name": "Kankanaey",
-            "divisor": 2293
-        },
-        {
-            "id": 2422,
-            "name": "Malagasy languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2423,
-            "name": "Malay",
-            "divisor": 2293
-        },
-        {
-            "id": 2424,
-            "name": "Pampangan (Kapampangan, Pampango)",
-            "divisor": 2293
-        },
-        {
-            "id": 2425,
-            "name": "Pangasinan",
-            "divisor": 2293
-        },
-        {
             "id": 2426,
             "name": "Tagalog (Pilipino, Filipino)",
-            "divisor": 2293
-        },
-        {
-            "id": 2427,
-            "name": "Austronesian languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -11861,33 +11366,8 @@
             "divisor": 2293
         },
         {
-            "id": 2430,
-            "name": "Jamaican English Creole",
-            "divisor": 2293
-        },
-        {
-            "id": 2431,
-            "name": "Morisyen",
-            "divisor": 2293
-        },
-        {
-            "id": 2432,
-            "name": "Creole, n.o.s.",
-            "divisor": 2293
-        },
-        {
-            "id": 2433,
-            "name": "Creole languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2434,
             "name": "Dravidian languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2435,
-            "name": "Kannada",
             "divisor": 2293
         },
         {
@@ -11898,16 +11378,6 @@
         {
             "id": 2437,
             "name": "Tamil",
-            "divisor": 2293
-        },
-        {
-            "id": 2438,
-            "name": "Telugu",
-            "divisor": 2293
-        },
-        {
-            "id": 2439,
-            "name": "Dravidian languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -11936,38 +11406,8 @@
             "divisor": 2293
         },
         {
-            "id": 2445,
-            "name": "Baltic languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2446,
-            "name": "Latvian",
-            "divisor": 2293
-        },
-        {
-            "id": 2447,
-            "name": "Lithuanian",
-            "divisor": 2293
-        },
-        {
             "id": 2448,
             "name": "Slavic languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2449,
-            "name": "Bulgarian",
-            "divisor": 2293
-        },
-        {
-            "id": 2450,
-            "name": "Czech",
-            "divisor": 2293
-        },
-        {
-            "id": 2451,
-            "name": "Macedonian",
             "divisor": 2293
         },
         {
@@ -11986,33 +11426,8 @@
             "divisor": 2293
         },
         {
-            "id": 2455,
-            "name": "Bosnian",
-            "divisor": 2293
-        },
-        {
-            "id": 2456,
-            "name": "Croatian",
-            "divisor": 2293
-        },
-        {
             "id": 2457,
             "name": "Serbian",
-            "divisor": 2293
-        },
-        {
-            "id": 2458,
-            "name": "Serbo-Croatian, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2459,
-            "name": "Slovak",
-            "divisor": 2293
-        },
-        {
-            "id": 2460,
-            "name": "Slovene (Slovenian)",
             "divisor": 2293
         },
         {
@@ -12021,33 +11436,8 @@
             "divisor": 2293
         },
         {
-            "id": 2462,
-            "name": "Slavic languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2463,
-            "name": "Celtic languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2464,
-            "name": "Scottish Gaelic",
-            "divisor": 2293
-        },
-        {
-            "id": 2465,
-            "name": "Celtic languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2466,
             "name": "Germanic languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2467,
-            "name": "Frisian",
             "divisor": 2293
         },
         {
@@ -12066,11 +11456,6 @@
             "divisor": 2293
         },
         {
-            "id": 2471,
-            "name": "Swiss German",
-            "divisor": 2293
-        },
-        {
             "id": 2472,
             "name": "Yiddish",
             "divisor": 2293
@@ -12078,11 +11463,6 @@
         {
             "id": 2473,
             "name": "Low Saxon-Low Franconian languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2474,
-            "name": "Afrikaans",
             "divisor": 2293
         },
         {
@@ -12096,48 +11476,8 @@
             "divisor": 2293
         },
         {
-            "id": 2477,
-            "name": "Low Saxon",
-            "divisor": 2293
-        },
-        {
             "id": 2478,
             "name": "Plautdietsch",
-            "divisor": 2293
-        },
-        {
-            "id": 2479,
-            "name": "Vlaams (Flemish)",
-            "divisor": 2293
-        },
-        {
-            "id": 2480,
-            "name": "Scandinavian languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2481,
-            "name": "Danish",
-            "divisor": 2293
-        },
-        {
-            "id": 2482,
-            "name": "Icelandic",
-            "divisor": 2293
-        },
-        {
-            "id": 2483,
-            "name": "Norwegian",
-            "divisor": 2293
-        },
-        {
-            "id": 2484,
-            "name": "Swedish",
-            "divisor": 2293
-        },
-        {
-            "id": 2485,
-            "name": "Germanic languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -12171,33 +11511,8 @@
             "divisor": 2293
         },
         {
-            "id": 2492,
-            "name": "Kacchi",
-            "divisor": 2293
-        },
-        {
-            "id": 2493,
-            "name": "Marathi",
-            "divisor": 2293
-        },
-        {
-            "id": 2494,
-            "name": "Nepali",
-            "divisor": 2293
-        },
-        {
             "id": 2495,
             "name": "Punjabi (Panjabi)",
-            "divisor": 2293
-        },
-        {
-            "id": 2496,
-            "name": "Sindhi",
-            "divisor": 2293
-        },
-        {
-            "id": 2497,
-            "name": "Sinhala (Sinhalese)",
             "divisor": 2293
         },
         {
@@ -12206,18 +11521,8 @@
             "divisor": 2293
         },
         {
-            "id": 2499,
-            "name": "Indo-Aryan languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2500,
             "name": "Iranian languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2501,
-            "name": "Kurdish",
             "divisor": 2293
         },
         {
@@ -12246,23 +11551,8 @@
             "divisor": 2293
         },
         {
-            "id": 2507,
-            "name": "Iranian languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2508,
-            "name": "Indo-Iranian languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2509,
             "name": "Italic (Romance) languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2510,
-            "name": "Catalan",
             "divisor": 2293
         },
         {
@@ -12286,16 +11576,6 @@
             "divisor": 2293
         },
         {
-            "id": 2515,
-            "name": "Italic (Romance) languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2516,
-            "name": "Indo-European languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2517,
             "name": "Japanese",
             "divisor": 2293
@@ -12303,101 +11583,6 @@
         {
             "id": 2518,
             "name": "Korean",
-            "divisor": 2293
-        },
-        {
-            "id": 2519,
-            "name": "Mongolian",
-            "divisor": 2293
-        },
-        {
-            "id": 2520,
-            "name": "Niger-Congo languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2521,
-            "name": "Akan (Twi)",
-            "divisor": 2293
-        },
-        {
-            "id": 2522,
-            "name": "Edo",
-            "divisor": 2293
-        },
-        {
-            "id": 2523,
-            "name": "Fulah (Pular, Pulaar, Fulfulde)",
-            "divisor": 2293
-        },
-        {
-            "id": 2524,
-            "name": "Ga",
-            "divisor": 2293
-        },
-        {
-            "id": 2525,
-            "name": "Ganda",
-            "divisor": 2293
-        },
-        {
-            "id": 2526,
-            "name": "Igbo",
-            "divisor": 2293
-        },
-        {
-            "id": 2527,
-            "name": "Kinyarwanda (Rwanda)",
-            "divisor": 2293
-        },
-        {
-            "id": 2528,
-            "name": "Lingala",
-            "divisor": 2293
-        },
-        {
-            "id": 2529,
-            "name": "Rundi (Kirundi)",
-            "divisor": 2293
-        },
-        {
-            "id": 2530,
-            "name": "Shona",
-            "divisor": 2293
-        },
-        {
-            "id": 2531,
-            "name": "Swahili",
-            "divisor": 2293
-        },
-        {
-            "id": 2532,
-            "name": "Wolof",
-            "divisor": 2293
-        },
-        {
-            "id": 2533,
-            "name": "Yoruba",
-            "divisor": 2293
-        },
-        {
-            "id": 2534,
-            "name": "Niger-Congo languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2535,
-            "name": "Nilo-Saharan languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2536,
-            "name": "Dinka",
-            "divisor": 2293
-        },
-        {
-            "id": 2537,
-            "name": "Nilo-Saharan languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -12411,16 +11596,6 @@
             "divisor": 2293
         },
         {
-            "id": 2540,
-            "name": "Quebec Sign Language",
-            "divisor": 2293
-        },
-        {
-            "id": 2541,
-            "name": "Sign languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2542,
             "name": "Sino-Tibetan languages",
             "divisor": 2293
@@ -12431,28 +11606,8 @@
             "divisor": 2293
         },
         {
-            "id": 2544,
-            "name": "Hakka",
-            "divisor": 2293
-        },
-        {
             "id": 2545,
             "name": "Mandarin",
-            "divisor": 2293
-        },
-        {
-            "id": 2546,
-            "name": "Min Dong",
-            "divisor": 2293
-        },
-        {
-            "id": 2547,
-            "name": "Min Nan (Chaochow, Teochow, Fukien, Taiwanese)",
-            "divisor": 2293
-        },
-        {
-            "id": 2548,
-            "name": "Wu (Shanghainese)",
             "divisor": 2293
         },
         {
@@ -12466,33 +11621,8 @@
             "divisor": 2293
         },
         {
-            "id": 2551,
-            "name": "Chinese languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2552,
             "name": "Tibeto-Burman languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2553,
-            "name": "Burmese",
-            "divisor": 2293
-        },
-        {
-            "id": 2554,
-            "name": "Karenic languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2555,
-            "name": "S'gaw Karen",
-            "divisor": 2293
-        },
-        {
-            "id": 2556,
-            "name": "Karenic languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -12501,23 +11631,8 @@
             "divisor": 2293
         },
         {
-            "id": 2558,
-            "name": "Tibeto-Burman languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2559,
-            "name": "Sino-Tibetan languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2560,
             "name": "Tai-Kadai languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2561,
-            "name": "Lao",
             "divisor": 2293
         },
         {
@@ -12526,63 +11641,13 @@
             "divisor": 2293
         },
         {
-            "id": 2563,
-            "name": "Tai-Kadai languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
             "id": 2564,
             "name": "Turkic languages",
             "divisor": 2293
         },
         {
-            "id": 2565,
-            "name": "Azerbaijani",
-            "divisor": 2293
-        },
-        {
             "id": 2566,
             "name": "Turkish",
-            "divisor": 2293
-        },
-        {
-            "id": 2567,
-            "name": "Uyghur",
-            "divisor": 2293
-        },
-        {
-            "id": 2568,
-            "name": "Uzbek",
-            "divisor": 2293
-        },
-        {
-            "id": 2569,
-            "name": "Turkic languages, n.i.e.",
-            "divisor": 2293
-        },
-        {
-            "id": 2570,
-            "name": "Uralic languages",
-            "divisor": 2293
-        },
-        {
-            "id": 2571,
-            "name": "Estonian",
-            "divisor": 2293
-        },
-        {
-            "id": 2572,
-            "name": "Finnish",
-            "divisor": 2293
-        },
-        {
-            "id": 2573,
-            "name": "Hungarian",
-            "divisor": 2293
-        },
-        {
-            "id": 2574,
-            "name": "Other languages, n.i.e.",
             "divisor": 2293
         },
         {
@@ -12660,11 +11725,6 @@
         {
             "id": 2590,
             "name": "French and non-official language(s)",
-            "divisor": 2581
-        },
-        {
-            "id": 2591,
-            "name": "English, French and non-official language(s)",
             "divisor": 2581
         },
         {

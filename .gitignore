@@ -7,3 +7,7 @@ map/
 dist/
 database/
 __pycache__/
+.venv/
+output/**.geojson
+output/**.pmtiles
+output/**.tmp

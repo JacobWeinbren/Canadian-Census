@@ -5,6 +5,7 @@
 	"scripts": {
 		"build": "npx tsc -p tsconfig.json",
 		"start": "node dist/server.js",
+		"statistics": "node dist/statistics.js",
 		"db": "node --max-old-space-size=25000 dist/database.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
