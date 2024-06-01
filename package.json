@@ -5,24 +5,33 @@
 	"scripts": {
 		"build": "npx tsc -p tsconfig.json",
 		"start": "node dist/server.js",
-		"statistics": "node dist/statistics.js",
-		"db": "node --max-old-space-size=25000 dist/database.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"statistics": "env-cmd -f .env.dev node --max-old-space-size=35000 dist/statistics.js",
+		"create": "env-cmd -f .env.dev node --expose-gc --max-old-space-size=30000 dist/database.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "node dist/server.js",
+		"production": "env-cmd -f .env.vpc node dist/server.js"
 	},
 	"license": "MIT",
 	"dependencies": {
 		"@types/express": "^4.17.21",
+		"async": "^3.2.5",
 		"cli-progress": "^3.12.0",
+		"csv-parse": "^5.5.6",
 		"csv-parser": "^3.0.0",
 		"express": "^4.19.2",
+		"ioredis": "^5.4.1",
+		"p-limit": "^5.0.0",
 		"pbf": "^3.2.1",
 		"pmtiles": "^3.0.5",
+		"progress": "^2.0.3",
+		"redis": "^4.6.14",
 		"sqlite": "^5.1.1",
 		"sqlite3": "^5.1.7",
 		"tippecanoe": "^0.6.0",
 		"vtt": "^0.0.3"
 	},
 	"devDependencies": {
+		"env-cmd": "^10.1.0",
 		"typescript": "^5.4.5"
 	}
 }

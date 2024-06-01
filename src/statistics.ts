@@ -1,73 +1,219 @@
-import sqlite3 from "sqlite3";
-import { open } from "sqlite";
 import fs from "fs";
+import path from "path";
+import csv from "csv-parser";
+import ProgressBar from "progress";
 
-// Interfaces for menu items and results
 interface MenuItem {
 	id: number;
 	name: string;
 	divisor: number | null;
 }
 
-interface MenuList {
-	[key: string]: MenuItem[];
-}
+let keyValues: { [id: string]: number } = {};
 
-interface RangeResults {
-	min: number;
-	max: number;
-}
+const loadCSVDataIntoMemory = async (filePath: string) => {
+	if (!fs.existsSync(filePath)) {
+		throw new Error(`File not found: ${filePath}`);
+	}
 
-// Function to calculate trimmed range of values
-const calculateTrimmedRange = async () => {
-	const db = await open({
-		filename: "./database/database.db",
-		driver: sqlite3.Database,
+	return new Promise<void>((resolve, reject) => {
+		const readStream = fs
+			.createReadStream(filePath)
+			.pipe(csv({ headers: ["key", "value"] }));
+
+		readStream.on("data", (row) => {
+			const key = row.key;
+			const value = parseFloat(row.value);
+			if (!isNaN(value)) {
+				keyValues[key] = value;
+			} else {
+				console.warn(`Invalid value for key ${key}: ${row.value}`);
+			}
+		});
+
+		readStream.on("end", () => {
+			console.log("Finished reading CSV file");
+			resolve();
+		});
+
+		readStream.on("error", (error) => {
+			console.error("Error reading CSV file:", error);
+			reject(error);
+		});
 	});
+};
+
+const getValueFromMemory = (key: string): number | null => {
+	return keyValues[key] || null;
+};
+
+const processFile = async (
+	filePath: string,
+	allItems: Record<number, MenuItem>,
+	writeStream: fs.WriteStream,
+	progressBar: ProgressBar,
+	isFirstPass: boolean
+) => {
+	const processRow = async (row: any) => {
+		if (row.GEO_LEVEL === "Dissemination area") {
+			const dguid = row.DGUID;
+			const characteristicId = parseInt(row.CHARACTERISTIC_ID, 10);
+			const c1CountTotal = parseFloat(row.C1_COUNT_TOTAL);
+
+			const item = allItems[characteristicId];
+			if (item) {
+				const { id, divisor } = item;
+				const key = `${dguid}-${id}`;
+
+				if (isFirstPass) {
+					// First pass: write the c1_count_total value to CSV
+					writeStream.write(`${key},${c1CountTotal}\n`);
+				} else {
+					// Second pass: apply divisor if it exists
+					let value = c1CountTotal;
+					if (divisor) {
+						const divisorKey = `${dguid}-${divisor}`;
+						const divisorValue = getValueFromMemory(divisorKey);
+						if (divisorValue !== null) {
+							value =
+								Math.round(
+									((100 * c1CountTotal) / divisorValue) * 10
+								) / 10;
+						}
+					}
+					writeStream.write(`${key},${value}\n`);
+				}
+
+				progressBar.tick();
+			}
+		}
+	};
+
+	const processFilePass = () => {
+		return new Promise<void>((resolve, reject) => {
+			const stream = fs.createReadStream(filePath).pipe(csv());
+			const concurrencyLimit = 1000;
+			let activePromises = 0;
+
+			const processRowWithControlledConcurrency = async (row) => {
+				activePromises++;
+				try {
+					await processRow(row);
+				} finally {
+					activePromises--;
+					if (activePromises < concurrencyLimit) {
+						stream.resume(); // Resume the stream if under the limit
+					}
+				}
+			};
+
+			stream.on("data", async (row) => {
+				if (activePromises >= concurrencyLimit) {
+					stream.pause(); // Pause the stream if the limit is reached
+				}
+				processRowWithControlledConcurrency(row).catch((error) => {
+					reject(error);
+					stream.destroy(); // Ensure the stream is properly closed on error
+				});
+			});
+
+			stream.on("end", () => {
+				const checkCompletion = setInterval(() => {
+					if (activePromises === 0) {
+						// Ensure all processing is complete before resolving
+						clearInterval(checkCompletion);
+						resolve();
+					}
+				}, 100);
+			});
+
+			stream.on("error", reject);
+		});
+	};
+
+	return processFilePass();
+};
+
+const calculateTrimmedRange = async () => {
+	const outputFilePath = "output/data_stream.csv";
+	const writeStream = fs.createWriteStream(outputFilePath, { flags: "a" });
 
 	try {
-		// Read and parse the menu list from JSON file
-		const menuListData = fs.readFileSync("output/menu_list.json", "utf8");
-		const menuList: MenuList = JSON.parse(menuListData);
+		const directoryPath = "./data/census";
+		const files = fs
+			.readdirSync(directoryPath)
+			.filter((file) => file.includes("English_CSV_data"));
 
-		const ranges = {};
+		const currentDir = path.dirname(new URL(import.meta.url).pathname);
+		const menuListPath = path.join(currentDir, "../output/menu_list.json");
+		const menuList: Record<string, MenuItem[]> = JSON.parse(
+			fs.readFileSync(menuListPath, "utf-8")
+		);
+		const allItems: Record<number, MenuItem> = Object.values(menuList)
+			.flat()
+			.reduce((acc, item) => {
+				acc[item.id] = item;
+				return acc;
+			}, {} as Record<string, MenuItem>);
 
-		// Process each menu item to calculate its range
+		const totalRows = 152429616 * 2;
+		const progressBar = new ProgressBar("[:bar] :percent :etas", {
+			total: totalRows,
+		});
+
+		// First pass: write c1_count_total values to CSV
+		console.log("First Pass");
+		for (const file of files) {
+			const filePath = path.join(directoryPath, file);
+			await processFile(
+				filePath,
+				allItems,
+				writeStream,
+				progressBar,
+				true
+			);
+		}
+
+		writeStream.end();
+
+		// Load CSV data into memory before the second pass
+		await loadCSVDataIntoMemory(outputFilePath);
+
+		// Second pass: apply divisor and write final values to CSV
+		console.log("Second Pass");
+		const finalOutputFilePath = "output/final_data_stream.csv";
+		const finalWriteStream = fs.createWriteStream(finalOutputFilePath);
+		for (const file of files) {
+			const filePath = path.join(directoryPath, file);
+			await processFile(
+				filePath,
+				allItems,
+				finalWriteStream,
+				progressBar,
+				false
+			);
+		}
+
+		finalWriteStream.end();
+		progressBar.terminate();
+
+		// Now read the final CSV file and perform calculations
+		await loadCSVDataIntoMemory(finalOutputFilePath);
+
+		const ranges: { [id: number]: { min: number; max: number } } = {};
+
 		for (const category in menuList) {
 			for (const menuItem of menuList[category]) {
-				const { id, name, divisor } = menuItem;
+				const { id, name } = menuItem;
 
-				// Prepare SQL query based on whether a divisor is present
-				let valuesQuery =
-					divisor !== null
-						? `
-                    SELECT
-                        CASE WHEN CAST(c2.c1_count_total AS FLOAT) = 0 THEN 0
-                        ELSE CAST(c1.c1_count_total AS FLOAT) / CAST(c2.c1_count_total AS FLOAT) * 100
-                        END AS value
-                    FROM census_data c1
-                    JOIN census_data c2 ON c1.dguid = c2.dguid
-                    WHERE c1.characteristic_id = ? AND c2.characteristic_id = ?
-                `
-						: `
-                    SELECT c1_count_total AS value
-                    FROM census_data
-                    WHERE characteristic_id = ?
-                `;
+				const values = Object.keys(keyValues)
+					.filter((key) => key.endsWith(`-${id}`))
+					.map((key) => keyValues[key]);
 
-				// Execute query and fetch values
-				const values = await db.all(
-					valuesQuery,
-					divisor !== null ? [id, divisor] : [id]
-				);
-
-				// Sort values to facilitate range calculation
 				const sortedValues = values
-					.map((v) => v.value)
-					.filter((v) => !isNaN(v)) // Filter out NaN values
+					.filter((value) => !isNaN(value))
 					.sort((a, b) => a - b);
 
-				// Calculate trimmed ranges
 				const initialTrimPercent = 0.05;
 				const secondaryTrimPercent = 0.01;
 				const noTrimPercent = 0;
@@ -75,6 +221,7 @@ const calculateTrimmedRange = async () => {
 				const initialTrimCount = Math.floor(
 					sortedValues.length * initialTrimPercent
 				);
+
 				const initialTrimmedValues = sortedValues.slice(
 					initialTrimCount,
 					sortedValues.length - initialTrimCount
@@ -83,7 +230,6 @@ const calculateTrimmedRange = async () => {
 				let finalTrimPercent = initialTrimPercent;
 				let finalTrimmedValues = initialTrimmedValues;
 
-				// Adjust trimming based on the presence of zero values
 				if (initialTrimmedValues[initialTrimmedValues.length - 1] < 1) {
 					const secondaryTrimCount = Math.floor(
 						sortedValues.length * secondaryTrimPercent
@@ -106,46 +252,29 @@ const calculateTrimmedRange = async () => {
 					}
 				}
 
-				// Calculate final min and max values
-				let min = parseFloat(finalTrimmedValues[0]?.toFixed(1) || "0");
-				let max = parseFloat(
-					finalTrimmedValues[finalTrimmedValues.length - 1]?.toFixed(
-						1
-					) || "0"
-				);
+				const min = finalTrimmedValues[0];
+				const max = finalTrimmedValues[finalTrimmedValues.length - 1];
 
-				// Cap off min and max when divisor is present
-				if (divisor !== null) {
-					min = Math.max(min, 0);
-					max = Math.min(max, 100);
-				}
+				ranges[id] = { min, max };
 
-				const results: RangeResults = { min, max };
-				ranges[id] = results;
-
-				// Log results for each menu item
-				console.log(`Menu Item: ${name}`);
-				console.log(
-					`Trimmed Min ${finalTrimPercent * 100}%: ${results.min}`
-				);
-				console.log(
-					`Trimmed Max ${finalTrimPercent * 100}%: ${results.max}`
-				);
-				console.log("---");
+				// Log the name with min and max values
+				console.log(`Name: ${name}, Min: ${min}, Max: ${max}`);
 			}
 		}
 
-		// Save the calculated ranges to a JSON file
-		fs.writeFileSync("output/ranges.json", JSON.stringify(ranges, null, 2));
-		console.log("Ranges saved to output/ranges.json");
+		// Write ranges to a JSON file
+		const rangesFilePath = "output/ranges.json";
+		fs.writeFileSync(rangesFilePath, JSON.stringify(ranges, null, 2));
+
+		console.log("Ranges:", ranges);
 	} catch (error) {
-		console.error("Error calculating ranges:", error);
+		console.error("Error processing files:", error);
 	} finally {
-		await db.close();
+		writeStream.end();
 	}
 };
 
-// Execute the range calculation
-calculateTrimmedRange().catch((err) => {
-	console.error("Range calculation failed:", err);
+// Run the calculation on file execution
+calculateTrimmedRange().catch((error) => {
+	console.error("Error calculating trimmed range:", error);
 });

@@ -1,7 +1,7 @@
 node_modules/
 data/
 package-lock.json
-.env
+.env.**
 map/
 .DS_Store
 dist/
