@@ -1,39 +1,49 @@
-<div id="map" class="w-full h-full"></div>
+---
+import Dropdown from './Dropdown';
+---
+
+<div class="relative w-full h-full">
+  <div class="absolute top-0 left-0 right-0 w-full max-w-[600px] mx-auto z-10">
+    <Dropdown client:only="react" />
+</div>
+    <div id="map" class="w-full h-full"></div>
+</div>
+
 <script>
-	import mapboxgl from "mapbox-gl";
-	import { MapboxOverlay } from "@deck.gl/mapbox";
-	import { MVTLayer } from "@deck.gl/geo-layers";
+  import mapboxgl from "mapbox-gl";
+  import { MapboxOverlay } from "@deck.gl/mapbox";
+  import { MVTLayer } from "@deck.gl/geo-layers";
 
-	// Set your Mapbox access token here
-	const MAPBOX_TOKEN = import.meta.env.PUBLIC_MAPBOX_TOKEN;
+  // Set your Mapbox access token here
+  const MAPBOX_TOKEN = import.meta.env.PUBLIC_MAPBOX_TOKEN;
 
-	// Initialize the Mapbox map
-	const map = new mapboxgl.Map({
-		container: "map",
-		style: "mapbox://styles/mapbox/streets-v11",
-		center: [-79.3832, 43.6532],
-		zoom: 12,
-		accessToken: MAPBOX_TOKEN,
-		antialias: true,
-		projection: { name: "mercator" },
-	});
+  // Initialize the Mapbox map
+  const map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11",
+    center: [-79.3832, 43.6532],
+    zoom: 12,
+    accessToken: MAPBOX_TOKEN,
+    antialias: true,
+    projection: { name: "mercator" },
+  });
 
-	// Initialize the Deck.gl overlay
-	const deckOverlay = new MapboxOverlay({
-		interleaved: true,
-		layers: [
-			new MVTLayer({
-				id: "buildings",
-				data: "http://srv537337.hstgr.cloud:8080/tiles/buildings/{z}/{x}/{y}.pbf/1",
-				getFillColor: [0, 255, 0, 200], // Green color
-				minZoom: 0,
-				maxZoom: 23,
-				pickable: true,
-				onClick: (info) =>
-					info.object && alert(`Building ID: ${info.object.id}`),
-			}),
-		],
-	});
+  // Initialize the Deck.gl overlay
+  const deckOverlay = new MapboxOverlay({
+    interleaved: true,
+    layers: [
+      new MVTLayer({
+        id: "buildings",
+        data: "http://srv537337.hstgr.cloud:8080/tiles/buildings/{z}/{x}/{y}.pbf/1",
+        getFillColor: [0, 255, 0, 200], // Green color
+        minZoom: 0,
+        maxZoom: 23,
+        pickable: true,
+        onClick: (info) =>
+          info.object && alert(`Building ID: ${info.object.id}`),
+      }),
+    ],
+  });
 
-	map.addControl(deckOverlay);
+  map.addControl(deckOverlay);
 </script>

@@ -1,23 +1,36 @@
 {
-  "name": "",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.7.0",
-    "@astrojs/tailwind": "^5.1.0",
-    "@deck.gl/core": "^9.0.17",
-    "@deck.gl/geo-layers": "^9.0.17",
-    "@deck.gl/mapbox": "^9.0.17",
-    "astro": "^4.2.4",
-    "mapbox-gl": "^3.4.0",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.5"
-  }
+	"name": "",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.7.0",
+		"@astrojs/react": "^3.4.0",
+		"@astrojs/tailwind": "^5.1.0",
+		"@deck.gl/core": "^9.0.17",
+		"@deck.gl/geo-layers": "^9.0.17",
+		"@deck.gl/mapbox": "^9.0.17",
+		"@tanstack/react-virtual": "^3.5.0",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"astro": "^4.2.4",
+		"esbuild-plugin-react-virtualized": "^1.0.4",
+		"mapbox-gl": "^3.4.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"react-select": "^5.8.0",
+		"react-select-virtualized": "^5.5.1",
+		"react-virtualized": "^9.22.5",
+		"react-virtualized-auto-sizer": "^1.0.24",
+		"react-window": "^1.8.10",
+		"react-windowed-select": "^5.2.0",
+		"tailwindcss": "^3.4.3",
+		"typescript": "^5.4.5"
+	}
 }
