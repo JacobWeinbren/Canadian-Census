@@ -1,6 +1,6 @@
 import csv from "csv-parser";
 import path from "path";
-import cliProgress from "cli-progress";
+import ProgressBar from "progress";
 import fs from "fs";
 import { createClient } from "redis";
 
@@ -24,15 +24,16 @@ const processFile = async (
 			const characteristicId = parseInt(row.CHARACTERISTIC_ID, 10);
 			const c1CountTotal = parseFloat(row.C1_COUNT_TOTAL);
 
-			const item = allItems[characteristicId];
-			if (item) {
-				const { id, divisor } = item;
-				const key = `${dguid}-${id}`;
+			const key = `${dguid}-${characteristicId}`;
 
-				if (isFirstPass) {
-					// First pass: store the c1_count_total value
-					await redisClient.set(key, c1CountTotal.toString());
-				} else {
+			if (isFirstPass) {
+				// First pass: store the c1_count_total value
+				await redisClient.set(key, c1CountTotal.toString());
+			} else {
+				const item = allItems[characteristicId];
+				if (item) {
+					const { divisor } = item;
+
 					// Second pass: apply divisor if it exists
 					let value = c1CountTotal;
 					if (divisor) {
@@ -45,13 +46,18 @@ const processFile = async (
 								Math.round(
 									((100 * c1CountTotal) / divisorValue) * 10
 								) / 10;
+						} else {
+							console.log(
+								"Missing divisor?",
+								`${dguid}-${divisor}`
+							);
 						}
 					}
 					await redisClient.set(key, value.toString());
 				}
-
-				progressBar.increment();
 			}
+
+			progressBar.tick();
 		}
 	};
 
@@ -116,10 +122,9 @@ const verifyDataIntegrity = async (
 ) => {
 	const missingEntries = [];
 	const totalRows = 142129961; // Total number of rows to process
-	const progressBar = new cliProgress.SingleBar(
-		{},
-		cliProgress.Presets.shades_classic
-	);
+	const progressBar = new ProgressBar("[:bar] :percent :etas", {
+		total: totalRows,
+	});
 	progressBar.start(totalRows, 0);
 
 	const checkKeyInRedis = async (dguid: string, id: string) => {
@@ -129,7 +134,7 @@ const verifyDataIntegrity = async (
 			missingEntries.push(key);
 			console.log(key);
 		}
-		progressBar.increment();
+		progressBar.tick();
 	};
 
 	return new Promise<void>((resolve, reject) => {
@@ -149,7 +154,7 @@ const verifyDataIntegrity = async (
 				}
 			})
 			.on("end", () => {
-				progressBar.stop();
+				progressBar.terminate();
 				if (missingEntries.length > 0) {
 					console.log("Missing entries:", missingEntries);
 				} else {
@@ -159,7 +164,7 @@ const verifyDataIntegrity = async (
 			})
 			.on("error", (error) => {
 				console.error("Error during data integrity check:", error);
-				progressBar.stop();
+				progressBar.terminate();
 				reject(error);
 			});
 	});
@@ -202,23 +207,18 @@ const populateDatabase = async () => {
 
 	// Initialize progress bar
 	const totalRows = 152429616 * 2;
-	const progressBar = new cliProgress.SingleBar(
-		{
-			etaBuffer: 100,
-		},
-		cliProgress.Presets.shades_classic
-	);
-	//progressBar.start(totalRows, 0);
+	const progressBar = new ProgressBar("[:bar] :percent :etas", {
+		total: totalRows,
+	});
 
 	// Process each file
 	for (const file of files) {
 		console.log("Processing file contents", file);
 		const filePath = path.join(directoryPath, file);
-		//await processFile(filePath, allItems, redisClient, progressBar);
-		await verifyDataIntegrity(filePath, allItems, redisClient);
+		await processFile(filePath, allItems, redisClient, progressBar);
+		//await verifyDataIntegrity(filePath, allItems, redisClient);
 	}
 
-	progressBar.stop();
 	await redisClient.disconnect();
 };
 

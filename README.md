@@ -36,8 +36,8 @@ npm run build
 
 ```bash
 python scripts/menu_list.py
-python scripts/clean.py
 npm run statistics
+python scripts/clean.py
 ```
 
 4. Generate map data:
@@ -49,7 +49,7 @@ python scripts/intersect.py
 5. Create the database:
 
 ```bash
-npm run database
+npm run create
 ```
 
 6. Start the server:

@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import csv from "csv-parser";
 import ProgressBar from "progress";
+import Database from "better-sqlite3";
 
 interface MenuItem {
 	id: number;
@@ -9,125 +10,134 @@ interface MenuItem {
 	divisor: number | null;
 }
 
-let keyValues: { [id: string]: number } = {};
+let db: Database.Database;
 
-const loadCSVDataIntoMemory = async (filePath: string) => {
-	if (!fs.existsSync(filePath)) {
-		throw new Error(`File not found: ${filePath}`);
-	}
-
-	return new Promise<void>((resolve, reject) => {
-		const readStream = fs
-			.createReadStream(filePath)
-			.pipe(csv({ headers: ["key", "value"] }));
-
-		readStream.on("data", (row) => {
-			const key = row.key;
-			const value = parseFloat(row.value);
-			if (!isNaN(value)) {
-				keyValues[key] = value;
-			} else {
-				console.warn(`Invalid value for key ${key}: ${row.value}`);
-			}
-		});
-
-		readStream.on("end", () => {
-			console.log("Finished reading CSV file");
-			resolve();
-		});
-
-		readStream.on("error", (error) => {
-			console.error("Error reading CSV file:", error);
-			reject(error);
-		});
-	});
+const openDatabase = () => {
+	db = new Database(":memory:");
+	db.exec(`
+		CREATE TABLE IF NOT EXISTS keyValues (
+			key TEXT PRIMARY KEY,
+			value REAL
+		);
+	`);
 };
 
 const getValueFromMemory = (key: string): number | null => {
-	return keyValues[key] || null;
+	const row = db
+		.prepare("SELECT value FROM keyValues WHERE key = ?")
+		.get(key);
+	return row ? row.value : null;
 };
 
 const processFile = async (
 	filePath: string,
 	allItems: Record<number, MenuItem>,
-	writeStream: fs.WriteStream,
 	progressBar: ProgressBar,
 	isFirstPass: boolean
 ) => {
+	const batchSize = 1000;
+	let batch: { key: string; value: number }[] = [];
+
 	const processRow = async (row: any) => {
 		if (row.GEO_LEVEL === "Dissemination area") {
 			const dguid = row.DGUID;
 			const characteristicId = parseInt(row.CHARACTERISTIC_ID, 10);
 			const c1CountTotal = parseFloat(row.C1_COUNT_TOTAL);
 
-			const item = allItems[characteristicId];
-			if (item) {
-				const { id, divisor } = item;
-				const key = `${dguid}-${id}`;
+			const key = `${dguid}-${characteristicId}`;
 
-				if (isFirstPass) {
-					// First pass: write the c1_count_total value to CSV
-					writeStream.write(`${key},${c1CountTotal}\n`);
-				} else {
-					// Second pass: apply divisor if it exists
+			if (isFirstPass) {
+				batch.push({ key, value: c1CountTotal });
+			} else {
+				const item = allItems[characteristicId];
+				if (item) {
+					const { divisor } = item;
 					let value = c1CountTotal;
 					if (divisor) {
 						const divisorKey = `${dguid}-${divisor}`;
 						const divisorValue = getValueFromMemory(divisorKey);
-						if (divisorValue !== null) {
+						if (divisorValue) {
 							value =
 								Math.round(
-									((100 * c1CountTotal) / divisorValue) * 10
-								) / 10;
+									((100 * c1CountTotal) / divisorValue) * 100
+								) / 100;
+						} else {
+							value = divisorValue;
 						}
 					}
-					writeStream.write(`${key},${value}\n`);
+					batch.push({ key, value });
 				}
+			}
+			progressBar.tick();
 
-				progressBar.tick();
+			if (batch.length >= batchSize) {
+				writeBatchToDatabase(batch);
+				batch = [];
 			}
 		}
+	};
+
+	const writeBatchToDatabase = (batch: { key: string; value: number }[]) => {
+		const insert = db.prepare(
+			"INSERT OR REPLACE INTO keyValues (key, value) VALUES (?, ?)"
+		);
+		const transaction = db.transaction((batch) => {
+			for (const { key, value } of batch) {
+				insert.run(key, value);
+			}
+		});
+		transaction(batch);
 	};
 
 	const processFilePass = () => {
 		return new Promise<void>((resolve, reject) => {
 			const stream = fs.createReadStream(filePath).pipe(csv());
-			const concurrencyLimit = 1000;
+			const concurrencyLimit = 2000;
 			let activePromises = 0;
+			let paused = false;
 
 			const processRowWithControlledConcurrency = async (row) => {
 				activePromises++;
 				try {
 					await processRow(row);
+				} catch (error) {
+					console.error("Error processing row:", error);
 				} finally {
 					activePromises--;
-					if (activePromises < concurrencyLimit) {
-						stream.resume(); // Resume the stream if under the limit
+					if (paused && activePromises < concurrencyLimit) {
+						paused = false;
+						console.log("Resuming stream");
+						stream.resume();
 					}
 				}
 			};
 
-			stream.on("data", async (row) => {
+			stream.on("data", (row) => {
 				if (activePromises >= concurrencyLimit) {
-					stream.pause(); // Pause the stream if the limit is reached
+					paused = true;
+					console.log("Pausing stream");
+					stream.pause();
 				}
-				processRowWithControlledConcurrency(row).catch((error) => {
-					reject(error);
-					stream.destroy(); // Ensure the stream is properly closed on error
-				});
+				processRowWithControlledConcurrency(row);
 			});
 
-			stream.on("end", () => {
-				const checkCompletion = setInterval(() => {
+			stream.on("end", async () => {
+				console.log("Stream ended");
+				const checkCompletion = setInterval(async () => {
 					if (activePromises === 0) {
-						// Ensure all processing is complete before resolving
 						clearInterval(checkCompletion);
+						if (batch.length > 0) {
+							writeBatchToDatabase(batch);
+						}
 						resolve();
 					}
 				}, 100);
 			});
 
-			stream.on("error", reject);
+			stream.on("error", (error) => {
+				console.error("Stream error:", error);
+				reject(error);
+			});
 		});
 	};
 
@@ -135,10 +145,9 @@ const processFile = async (
 };
 
 const calculateTrimmedRange = async () => {
-	const outputFilePath = "output/data_stream.csv";
-	const writeStream = fs.createWriteStream(outputFilePath, { flags: "a" });
-
 	try {
+		openDatabase();
+
 		const directoryPath = "./data/census";
 		const files = fs
 			.readdirSync(directoryPath)
@@ -154,64 +163,45 @@ const calculateTrimmedRange = async () => {
 			.reduce((acc, item) => {
 				acc[item.id] = item;
 				return acc;
-			}, {} as Record<string, MenuItem>);
+			}, {} as Record<number, MenuItem>);
 
 		const totalRows = 152429616 * 2;
 		const progressBar = new ProgressBar("[:bar] :percent :etas", {
 			total: totalRows,
 		});
 
-		// First pass: write c1_count_total values to CSV
+		// First pass: store c1_count_total values in memory
 		console.log("First Pass");
 		for (const file of files) {
 			const filePath = path.join(directoryPath, file);
-			await processFile(
-				filePath,
-				allItems,
-				writeStream,
-				progressBar,
-				true
-			);
+			await processFile(filePath, allItems, progressBar, true);
 		}
 
-		writeStream.end();
-
-		// Load CSV data into memory before the second pass
-		await loadCSVDataIntoMemory(outputFilePath);
-
-		// Second pass: apply divisor and write final values to CSV
+		// Second pass: apply divisor and store final values in memory
 		console.log("Second Pass");
-		const finalOutputFilePath = "output/final_data_stream.csv";
-		const finalWriteStream = fs.createWriteStream(finalOutputFilePath);
 		for (const file of files) {
 			const filePath = path.join(directoryPath, file);
-			await processFile(
-				filePath,
-				allItems,
-				finalWriteStream,
-				progressBar,
-				false
-			);
+			await processFile(filePath, allItems, progressBar, false);
 		}
 
-		finalWriteStream.end();
 		progressBar.terminate();
 
-		// Now read the final CSV file and perform calculations
-		await loadCSVDataIntoMemory(finalOutputFilePath);
-
+		// Now perform calculations on the final data in memory
 		const ranges: { [id: number]: { min: number; max: number } } = {};
 
 		for (const category in menuList) {
 			for (const menuItem of menuList[category]) {
 				const { id, name } = menuItem;
 
-				const values = Object.keys(keyValues)
-					.filter((key) => key.endsWith(`-${id}`))
-					.map((key) => keyValues[key]);
+				const rows = db
+					.prepare("SELECT value FROM keyValues WHERE key LIKE ?")
+					.all(`%-${id}`);
+				const values = Array.isArray(rows)
+					? rows.map((row) => row.value)
+					: [];
 
 				const sortedValues = values
-					.filter((value) => !isNaN(value))
+					.filter((value) => value !== null && !isNaN(value))
 					.sort((a, b) => a - b);
 
 				const initialTrimPercent = 0.05;
@@ -258,7 +248,9 @@ const calculateTrimmedRange = async () => {
 				ranges[id] = { min, max };
 
 				// Log the name with min and max values
-				console.log(`Name: ${name}, Min: ${min}, Max: ${max}`);
+				console.log(
+					`Name: ${name}, Trim Percent: ${finalTrimPercent}, Min: ${min}, Max: ${max}`
+				);
 			}
 		}
 
@@ -269,8 +261,6 @@ const calculateTrimmedRange = async () => {
 		console.log("Ranges:", ranges);
 	} catch (error) {
 		console.error("Error processing files:", error);
-	} finally {
-		writeStream.end();
 	}
 };
 
