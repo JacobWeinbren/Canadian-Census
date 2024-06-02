@@ -13,7 +13,7 @@
 -   **scripts/computed_values.py**: Identifies and collects calculated variables from the CSV.
 -   **scripts/intersect.py**: Generates map data by intersecting areas and buildings.
 -   **data/census/**: Contains the raw census data in CSV format.
--   **src/database.ts**: Initializes SQLite database and inserts census data.
+-   **src/database.ts**: Processes CSV files and updates Redis.
 -   **src/server.ts**: Sets up an Express server to serve map tiles.
 -   **src/statistics.ts**: Calculates percentiles for menu items.
 
