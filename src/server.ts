@@ -94,35 +94,47 @@ const initialiseServer = async () => {
 	try {
 		await redisClient.connect();
 
-		const pmtilesPath = path.resolve("output/canada-buildings.pmtiles");
-		await fs.access(pmtilesPath);
+		const pmtilesPaths = {
+			buildings: path.resolve("output/canada-buildings.pmtiles"),
+			areas: path.resolve("output/canada-areas.pmtiles"),
+		};
 
-		const fileSource = new FileSystemSource(pmtilesPath);
-		const pmtiles = new PMTiles(fileSource);
+		await Promise.all([
+			fs.access(pmtilesPaths.buildings),
+			fs.access(pmtilesPaths.areas),
+		]);
 
-		// Route to get tile data
-		app.get("/tiles/:z/:x/:y.pbf/:charId1", async (req, res, next) => {
-			try {
-				const { z, x, y, charId1 } = req.params;
-				const tile = await pmtiles.getZxy(
-					Number(z),
-					Number(x),
-					Number(y)
+		const fileSources = {
+			buildings: new FileSystemSource(pmtilesPaths.buildings),
+			areas: new FileSystemSource(pmtilesPaths.areas),
+		};
+
+		const pmtiles = {
+			buildings: new PMTiles(fileSources.buildings),
+			areas: new PMTiles(fileSources.areas),
+		};
+
+		// Route to get tile data for buildings
+		app.get(
+			"/tiles/buildings/:z/:x/:y.pbf/:charId1",
+			async (req, res, next) => {
+				await handleTileRequest(
+					req,
+					res,
+					next,
+					pmtiles.buildings,
+					"buildings"
 				);
-
-				if (!tile) return res.status(404).send("Tile not found");
-
-				const buffer = Buffer.from(tile.data);
-				const dguids = await extractDguidsFromTile(buffer);
-				const results = await fetchCachedCensusData(dguids, charId1);
-				const modifiedTile = await modifyTileData(buffer, results);
-
-				res.setHeader("Content-Type", "application/x-protobuf");
-				res.send(modifiedTile);
-			} catch (error) {
-				next(error);
 			}
-		});
+		);
+
+		// Route to get tile data for areas
+		app.get(
+			"/tiles/areas/:z/:x/:y.pbf/:charId1",
+			async (req, res, next) => {
+				await handleTileRequest(req, res, next, pmtiles.areas, "areas");
+			}
+		);
 
 		// Error handling middleware
 		app.use((err, req, res, next) => {
@@ -136,6 +148,47 @@ const initialiseServer = async () => {
 		console.error("Initialisation error:", error);
 	}
 };
+
+/**
+ * Handle tile requests.
+ */
+async function handleTileRequest(req, res, next, pmtilesInstance, type) {
+	try {
+		const { z, x, y, charId1 } = req.params;
+		const cacheKey = `tile-${type}-${z}-${x}-${y}-${charId1}`;
+
+		// Check if the tile data is already cached
+		const cachedTile = await redisClient.get(cacheKey);
+		if (cachedTile) {
+			res.setHeader("Content-Type", "application/x-protobuf");
+			return res.send(Buffer.from(cachedTile, "base64"));
+		}
+
+		const tile = await pmtilesInstance.getZxy(
+			Number(z),
+			Number(x),
+			Number(y)
+		);
+		if (!tile) return res.status(404).send("Tile not found");
+
+		const buffer = Buffer.from(tile.data);
+		const dguids = await extractDguidsFromTile(buffer);
+		const results = await fetchCachedCensusData(dguids, charId1);
+		const modifiedTile = await modifyTileData(buffer, results);
+
+		// Cache the modified tile data for an hour
+		await redisClient.setEx(
+			cacheKey,
+			3600,
+			modifiedTile.toString("base64")
+		);
+
+		res.setHeader("Content-Type", "application/x-protobuf");
+		res.send(modifiedTile);
+	} catch (error) {
+		next(error);
+	}
+}
 
 /**
  * Extract DGUIDs from tile data.
@@ -171,6 +224,7 @@ async function modifyTileData(
 					if (result) {
 						feature.properties.value = result;
 					}
+					feature.properties.DGUID = "";
 				});
 			});
 			done(null, layers);
