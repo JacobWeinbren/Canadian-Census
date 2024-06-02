@@ -4,12 +4,10 @@
 	"type": "module",
 	"scripts": {
 		"build": "npx tsc -p tsconfig.json",
-		"start": "node dist/server.js",
 		"statistics": "env-cmd -f .env.dev node --max-old-space-size=30000 dist/statistics.js",
 		"create": "env-cmd -f .env.dev node --expose-gc --max-old-space-size=30000 dist/database.js",
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "node dist/server.js",
-		"production": "env-cmd -f .env.vpc node dist/server.js"
+		"dev": "env-cmd -f .env.dev node dist/server.js",
+		"production": "env-cmd -f .env.prod node dist/server.js"
 	},
 	"license": "MIT",
 	"dependencies": {

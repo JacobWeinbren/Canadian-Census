@@ -7,11 +7,13 @@ import { createClient } from "redis";
 
 const app = express();
 const redisClient = createClient({
-	url: `rediss://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}`,
-	pingInterval: 1000,
+	url: `redis://${encodeURIComponent(
+		process.env.DB_USERNAME || ""
+	)}:${encodeURIComponent(process.env.DB_PASSWORD || "")}@${
+		process.env.DB_HOST || ""
+	}:${process.env.DB_PORT || ""}`,
 	socket: {
 		connectTimeout: 5000,
-		tls: true,
 	},
 });
 
@@ -63,18 +65,21 @@ async function fetchCachedCensusData(
 	for (let i = 0; i < dguidArray.length; i += batchSize) {
 		const batch = dguidArray.slice(i, i + batchSize);
 		const keys = batch.map((dguid) => `${dguid}-${charId1}`);
-		const pipeline = redisClient.multi();
 
-		// Add MGET to the pipeline
-		pipeline.mGet(keys);
-
-		// Execute the pipeline and process results
-		const response = await pipeline.exec();
-		const values = response[0][1];
+		// Use mget directly
+		const values = await redisClient.mGet(keys);
 
 		values.forEach((value, index) => {
 			if (value !== null) {
-				results.set(batch[index], JSON.parse(value));
+				try {
+					results.set(batch[index], JSON.parse(value));
+				} catch (e) {
+					if (e instanceof SyntaxError && value === "NaN") {
+						results.set(batch[index], null);
+					} else {
+						throw e;
+					}
+				}
 			}
 		});
 	}
@@ -163,8 +168,8 @@ async function modifyTileData(
 			layers.forEach((layer) => {
 				layer.features.forEach((feature) => {
 					const result = resultsMap.get(feature.properties?.DGUID);
-					if (result?.value) {
-						feature.properties.value = result.value;
+					if (result) {
+						feature.properties.value = result;
 					}
 				});
 			});

@@ -8,5 +8,5 @@
 		"module": "ESNext"
 	},
 	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules", "dist", "src/server.ts"]
+	"exclude": ["node_modules", "dist"]
 }
