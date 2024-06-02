@@ -171,7 +171,7 @@ async function handleTileRequest(req, res, next, pmtilesInstance, type) {
 			Number(x),
 			Number(y)
 		);
-		if (!tile) return res.status(404).send("Tile not found");
+		if (!tile) return res.status(204).send();
 
 		const buffer = Buffer.from(tile.data);
 		const dguids = await extractDguidsFromTile(buffer);
