@@ -8,6 +8,7 @@ dist/
 database/
 __pycache__/
 .venv/
+.env
 output/**.geojson
 output/**.pmtiles
 output/**.tmp

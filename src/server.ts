@@ -4,8 +4,10 @@ import express from "express";
 import fs from "fs/promises";
 import vtt from "vtt";
 import { createClient } from "redis";
+import cors from "cors"; // Import the cors package
 
 const app = express();
+app.use(cors());
 const redisClient = createClient({
 	url: `redis://${encodeURIComponent(
 		process.env.DB_USERNAME || ""
