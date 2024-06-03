@@ -40,8 +40,6 @@ import Dropdown from "./Dropdown";
 		/>
 	</div>
 
-	<div id="hover">Hover over a point to see its value.</div>
-
 	<!-- Add the checkbox here -->
 	<div class="flex items-center gap-2">
 		<label for="toggleVisibility">Toggle Street Map Visibility</label>
@@ -60,6 +58,8 @@ import Dropdown from "./Dropdown";
 			></label>
 		</div>
 	</div>
+
+	<div id="hover">Hover over a point to see its value.</div>
 </div>
 
 <script>
@@ -152,7 +152,7 @@ import Dropdown from "./Dropdown";
 					const unit = selectedItem?.divisor ? "%" : "";
 					const formattedValue = formatValue(value);
 					document.getElementById("hover").textContent =
-						`Current value is ${formattedValue}${unit}`;
+						`Current hovered dissemination area has the value ${formattedValue}${unit}`;
 				} else {
 					document.getElementById("hover").textContent =
 						"Hover over a point to see its value.";
