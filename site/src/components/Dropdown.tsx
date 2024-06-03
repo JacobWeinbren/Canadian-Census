@@ -7,6 +7,7 @@ const options = Object.keys(updatedMenuList).flatMap((header) => [
 	...updatedMenuList[header].map((item) => ({
 		value: item.id,
 		label: item.name,
+		header,
 	})),
 ]);
 
@@ -22,14 +23,20 @@ const filterOption = (option, inputValue) => {
 const ListPicker = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [isVisible, setIsVisible] = useState(false);
+	const [visibleCategories, setVisibleCategories] = useState({});
 	const parentRef = useRef(null);
 	const searchInputRef = useRef(null);
+
 	const filteredOptions = options.filter((option) =>
 		filterOption(option, searchTerm)
 	);
 
+	const visibleOptions = filteredOptions.filter(
+		(option) => option.isHeader || visibleCategories[option.header]
+	);
+
 	const rowVirtualizer = useVirtualizer({
-		count: filteredOptions.length,
+		count: visibleOptions.length,
 		getScrollElement: () => parentRef.current,
 		estimateSize: () => 35,
 		overscan: 5,
@@ -52,32 +59,52 @@ const ListPicker = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		if (searchTerm) {
+			// Unfold all categories when searching
+			const allCategories = Object.keys(updatedMenuList).reduce(
+				(acc, header) => {
+					acc[header] = true;
+					return acc;
+				},
+				{}
+			);
+			setVisibleCategories(allCategories);
+		} else {
+			// Fold all categories when not searching
+			setVisibleCategories({});
+		}
+	}, [searchTerm]);
+
 	const handleOptionClick = (option) => {
-		setIsVisible(false);
+		if (option.isHeader) {
+			setVisibleCategories((prev) => ({
+				...prev,
+				[option.label]: !prev[option.label],
+			}));
+		} else {
+			setIsVisible(false);
 
-		const heading = option.isHeader
-			? option.label
-			: Object.keys(updatedMenuList).find((header) =>
-					updatedMenuList[header].some(
-						(item) => item.id === option.value
-					)
-			  );
+			const heading = Object.keys(updatedMenuList).find((header) =>
+				updatedMenuList[header].some((item) => item.id === option.value)
+			);
 
-		const event = new CustomEvent("optionSelected", {
-			detail: {
-				value: option.value,
-				name: option.label,
-				heading: heading,
-			},
-		});
-		window.dispatchEvent(event);
+			const event = new CustomEvent("optionSelected", {
+				detail: {
+					value: option.value,
+					name: option.label,
+					heading: heading,
+				},
+			});
+			window.dispatchEvent(event);
+		}
 	};
 
 	return (
 		<div className="list-picker relative bg-white shadow-lg rounded-lg">
 			<input
 				type="text"
-				placeholder="Search"
+				placeholder="Search or Click on Categories"
 				value={searchTerm}
 				ref={searchInputRef}
 				onFocus={() => setIsVisible(true)}
@@ -98,7 +125,7 @@ const ListPicker = () => {
 						}}
 					>
 						{rowVirtualizer.getVirtualItems().map((virtualRow) => {
-							const option = filteredOptions[virtualRow.index];
+							const option = visibleOptions[virtualRow.index];
 							return (
 								<div
 									key={virtualRow.key}
@@ -106,7 +133,7 @@ const ListPicker = () => {
 									data-index={virtualRow.index}
 									className={`p-2 leading-5 ${
 										option.isHeader
-											? "font-bold bg-gray-200"
+											? "font-bold bg-gray-200 cursor-pointer"
 											: "bg-white hover:bg-gray-100 cursor-pointer"
 									}`}
 									style={{
