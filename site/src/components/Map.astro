@@ -140,13 +140,13 @@ import Dropdown from "./Dropdown";
 		deckOverlay.setProps({
 			layers: [
 				createMVTLayer(
-					`http://srv537337.hstgr.cloud:8080/tiles/buildings/{z}/{x}/{y}.pbf/${currentLayerId}`,
+					`https://canadian-census-map.kafkaesque.blog/tiles/buildings/{z}/{x}/{y}.pbf/${currentLayerId}`,
 					currentLayerId,
 					firstLabelLayerId,
 					colorScale
 				),
 				createInvisibleAreaLayer(
-					`http://srv537337.hstgr.cloud:8080/tiles/areas/{z}/{x}/{y}.pbf/${currentLayerId}`,
+					`https://canadian-census-map.kafkaesque.blog/tiles/areas/{z}/{x}/{y}.pbf/${currentLayerId}`,
 					currentLayerId,
 					firstLabelLayerId
 				),
