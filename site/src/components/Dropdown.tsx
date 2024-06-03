@@ -52,6 +52,27 @@ const ListPicker = () => {
 		};
 	}, []);
 
+	const handleOptionClick = (option) => {
+		setIsVisible(false);
+
+		const heading = option.isHeader
+			? option.label
+			: Object.keys(updatedMenuList).find((header) =>
+					updatedMenuList[header].some(
+						(item) => item.id === option.value
+					)
+			  );
+
+		const event = new CustomEvent("optionSelected", {
+			detail: {
+				value: option.value,
+				name: option.label,
+				heading: heading,
+			},
+		});
+		window.dispatchEvent(event);
+	};
+
 	return (
 		<div className="list-picker relative bg-white shadow-lg rounded-lg">
 			<input
@@ -95,6 +116,7 @@ const ListPicker = () => {
 										width: "100%",
 										transform: `translateY(${virtualRow.start}px)`,
 									}}
+									onClick={() => handleOptionClick(option)}
 								>
 									{option.label}
 								</div>

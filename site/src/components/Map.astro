@@ -1,49 +1,199 @@
 ---
-import Dropdown from './Dropdown';
+import Dropdown from "./Dropdown";
 ---
 
 <div class="relative w-full h-full">
-  <div class="absolute top-0 left-0 right-0 w-full max-w-[600px] mx-auto z-10">
-    <Dropdown client:only="react" />
+	<div
+		class="absolute top-0 left-0 right-0 w-full max-w-[600px] mx-auto z-10"
+	>
+		<Dropdown client:only="react" />
+	</div>
+	<div id="map" class="w-full h-full"></div>
 </div>
-    <div id="map" class="w-full h-full"></div>
+
+<div
+	class="sm:w-[500px] text-sm w-full flex flex-col gap-2 absolute bottom-10 rounded-md z-10 bg-white p-4 left-1/2 transform -translate-x-1/2"
+>
+	<div>
+		<p class="text-md font-semibold" id="title">Canadian Census 2021</p>
+		<p id="subtitle">Canada</p>
+	</div>
+
+	<div>
+		<div id="gradient" class="w-full h-4 rounded"></div>
+		<div class="flex justify-between">
+			<span id="min"></span>
+			<span id="max"></span>
+		</div>
+	</div>
+
+	<div id="maxSliderContainer" class="hidden w-full">
+		<p id="">Set Maximum Percentage</p>
+		<input
+			id="maxSlider"
+			type="range"
+			min="0"
+			max="100"
+			step="0.1"
+			value="100"
+			class="w-full"
+		/>
+	</div>
+
+	<div id="hover">Hover over a point to see its value.</div>
 </div>
 
 <script>
-  import mapboxgl from "mapbox-gl";
-  import { MapboxOverlay } from "@deck.gl/mapbox";
-  import { MVTLayer } from "@deck.gl/geo-layers";
+	import mapboxgl from "mapbox-gl";
+	import { MapboxOverlay } from "@deck.gl/mapbox";
+	import { MVTLayer } from "@deck.gl/geo-layers";
+	import updatedRanges from "../updated_ranges.json";
+	import updatedMenuList from "../updated_menu_list.json";
+	import chroma from "chroma-js";
 
-  // Set your Mapbox access token here
-  const MAPBOX_TOKEN = import.meta.env.PUBLIC_MAPBOX_TOKEN;
+	const MAPBOX_TOKEN = import.meta.env.PUBLIC_MAPBOX_TOKEN;
 
-  // Initialize the Mapbox map
-  const map = new mapboxgl.Map({
-    container: "map",
-    style: "mapbox://styles/mapbox/streets-v11",
-    center: [-79.3832, 43.6532],
-    zoom: 12,
-    accessToken: MAPBOX_TOKEN,
-    antialias: true,
-    projection: { name: "mercator" },
-  });
+	const map = new mapboxgl.Map({
+		container: "map",
+		style: "mapbox://styles/mapbox/dark-v11",
+		center: [-79.3832, 43.6532],
+		zoom: 12,
+		maxZoom: 17,
+		accessToken: MAPBOX_TOKEN,
+		antialias: true,
+		projection: { name: "mercator" },
+	});
 
-  // Initialize the Deck.gl overlay
-  const deckOverlay = new MapboxOverlay({
-    interleaved: true,
-    layers: [
-      new MVTLayer({
-        id: "buildings",
-        data: "http://srv537337.hstgr.cloud:8080/tiles/buildings/{z}/{x}/{y}.pbf/1",
-        getFillColor: [0, 255, 0, 200], // Green color
-        minZoom: 0,
-        maxZoom: 23,
-        pickable: true,
-        onClick: (info) =>
-          info.object && alert(`Building ID: ${info.object.id}`),
-      }),
-    ],
-  });
+	let currentLayerId = "1";
+	let selectedOptionName = `Aggregate - ${updatedMenuList["Aggregate"][0].name}`;
+	const menuItems = Object.values(updatedMenuList).flat();
+	let minRange = updatedRanges[currentLayerId].min;
+	let maxRange = updatedRanges[currentLayerId].max;
 
-  map.addControl(deckOverlay);
+	function updateLegend(min, max, colorScale, layerId) {
+		const gradientColors = colorScale.colors(5).join(", ");
+		document.getElementById("gradient").style.background =
+			`linear-gradient(to right, ${gradientColors})`;
+
+		const selectedItem = menuItems.find((item) => item.id == layerId);
+		const unit = selectedItem?.divisor ? "%" : "";
+
+		const minValue = parseFloat(min).toFixed(1);
+		const maxValue = parseFloat(max).toFixed(1);
+
+		document.getElementById("min").textContent = `${minValue}${unit}`;
+		document.getElementById("max").textContent = `${maxValue}${unit}`;
+		document.getElementById("subtitle").textContent = selectedOptionName;
+	}
+
+	function createMVTLayer(dataUrl, layerId, beforeId, colorScale) {
+		return new MVTLayer({
+			id: "buildings",
+			data: dataUrl,
+			getFillColor: (d) => colorScale(d.properties.value ?? 0).rgb(),
+			getLineColor: () => [255, 255, 255, 0],
+			minZoom: 0,
+			maxZoom: 17,
+			pickable: true,
+			beforeId,
+			updateTriggers: { getFillColor: [maxRange] },
+		});
+	}
+
+	function createInvisibleAreaLayer(dataUrl, layerId, beforeId) {
+		return new MVTLayer({
+			id: "areas",
+			data: dataUrl,
+			getFillColor: () => [0, 0, 0, 0], 
+			getLineColor: () => [0, 0, 0, 0], 
+			minZoom: 0,
+			maxZoom: 17,
+			pickable: true,
+			beforeId,
+			onHover: ({ object }) => {
+				if (object) {
+					const value = object.properties.value ?? 0;
+					const selectedItem = menuItems.find(
+						(item) => item.id == layerId
+					);
+					const unit = selectedItem?.divisor ? "%" : "";
+					document.getElementById("hover").textContent =
+						`Current value is ${value}${unit}`;
+				} else {
+					document.getElementById("hover").textContent = "Hover over a point to see its value.";
+				}
+			},
+		});
+	}
+
+	function updateLayers() {
+		const colorScale = chroma
+			.scale(["#ca0020", "#f4a582", "#f7f7f7", "#92c5de", "#0571b0"])
+			.domain([minRange, maxRange]);
+
+		updateLegend(minRange, maxRange, colorScale, currentLayerId);
+
+		const firstLabelLayerId = map
+			.getStyle()
+			.layers.find((layer) => layer.type === "symbol").id;
+
+		deckOverlay.setProps({
+			layers: [
+				createMVTLayer(
+					`http://srv537337.hstgr.cloud:8080/tiles/buildings/{z}/{x}/{y}.pbf/${currentLayerId}`,
+					currentLayerId,
+					firstLabelLayerId,
+					colorScale
+				),
+				createInvisibleAreaLayer(
+					`http://srv537337.hstgr.cloud:8080/tiles/areas/{z}/{x}/{y}.pbf/${currentLayerId}`,
+					currentLayerId,
+					firstLabelLayerId
+				),
+			],
+		});
+	}
+
+	const deckOverlay = new MapboxOverlay({
+		interleaved: true,
+		layers: [],
+	});
+
+	map.on("load", () => {
+		map.addControl(deckOverlay);
+		updateLayers();
+	});
+
+	window.addEventListener("optionSelected", (event) => {
+		const customEvent = event as CustomEvent;
+		currentLayerId = customEvent.detail.value;
+		selectedOptionName = `${customEvent.detail.heading} - ${customEvent.detail.name}`;
+
+		minRange = updatedRanges[currentLayerId].min;
+		maxRange = updatedRanges[currentLayerId].max;
+
+		const selectedItem = menuItems.find(
+			(item) => item.id == Number(currentLayerId)
+		);
+		const maxSliderContainer =
+			document.getElementById("maxSliderContainer");
+
+		if (selectedItem?.divisor) {
+			maxSliderContainer.classList.remove("hidden");
+			const maxSlider = document.getElementById(
+				"maxSlider"
+			) as HTMLInputElement;
+			maxSlider.max = "100";
+			maxSlider.value = maxRange;
+		} else {
+			maxSliderContainer.classList.add("hidden");
+		}
+
+		updateLayers();
+	});
+
+	document.getElementById("maxSlider").addEventListener("input", (event) => {
+		maxRange = (event.target as HTMLInputElement).value;
+		updateLayers();
+	});
 </script>
