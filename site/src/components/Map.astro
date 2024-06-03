@@ -28,7 +28,7 @@ import Dropdown from "./Dropdown";
 	</div>
 
 	<div id="maxSliderContainer" class="hidden w-full">
-		<p id="">Set Maximum Percentage</p>
+		<p >Set Maximum Percentage</p>
 		<input
 			id="maxSlider"
 			type="range"
@@ -41,6 +41,27 @@ import Dropdown from "./Dropdown";
 	</div>
 
 	<div id="hover">Hover over a point to see its value.</div>
+
+	<!-- Add the checkbox here -->
+	<div class="flex items-center gap-2">
+		<label for="toggleVisibility"
+			>Toggle Layer Visibility</label
+		>
+		<div
+			class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
+		>
+			<input
+				type="checkbox"
+				id="toggleVisibility"
+				class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-4 appearance-none cursor-pointer right-6 checked:right-0 checked:border-blue-500"
+				checked
+			/>
+			<label
+				for="toggleVisibility"
+				class="toggle-label block overflow-hidden h-4 rounded-full bg-gray-300 cursor-pointer checked:bg-blue-500"
+			></label>
+		</div>
+	</div>
 </div>
 
 <script>
@@ -69,6 +90,7 @@ import Dropdown from "./Dropdown";
 	const menuItems = Object.values(updatedMenuList).flat();
 	let minRange = updatedRanges[currentLayerId].min;
 	let maxRange = updatedRanges[currentLayerId].max;
+	let mainLayerVisible = true;
 
 	function updateLegend(min, max, colorScale, layerId) {
 		const gradientColors = colorScale.colors(5).join(", ");
@@ -90,22 +112,28 @@ import Dropdown from "./Dropdown";
 		return new MVTLayer({
 			id: "buildings",
 			data: dataUrl,
-			getFillColor: (d) => colorScale(d.properties.value ?? 0).rgb(),
+			getFillColor: (d) =>
+				mainLayerVisible
+					? colorScale(d.properties.value ?? 0).rgb()
+					: [0, 0, 0, 0],
 			getLineColor: () => [255, 255, 255, 0],
 			minZoom: 0,
 			maxZoom: 17,
 			pickable: true,
 			beforeId,
-			updateTriggers: { getFillColor: [maxRange] },
+			updateTriggers: { getFillColor: [maxRange, mainLayerVisible] },
 		});
 	}
 
-	function createInvisibleAreaLayer(dataUrl, layerId, beforeId) {
+	function createInvisibleAreaLayer(dataUrl, layerId, beforeId, colorScale) {
 		return new MVTLayer({
 			id: "areas",
 			data: dataUrl,
-			getFillColor: () => [0, 0, 0, 0],
-			getLineColor: () => [0, 0, 0, 0],
+			getFillColor: (d) =>
+				!mainLayerVisible
+					? colorScale(d.properties.value ?? 0).rgb()
+					: [0, 0, 0, 0],
+			getLineColor: () => [255, 255, 255, 0],
 			minZoom: 0,
 			maxZoom: 17,
 			pickable: true,
@@ -124,6 +152,7 @@ import Dropdown from "./Dropdown";
 						"Hover over a point to see its value.";
 				}
 			},
+			updateTriggers: { getFillColor: [maxRange, mainLayerVisible] },
 		});
 	}
 
@@ -149,7 +178,8 @@ import Dropdown from "./Dropdown";
 				createInvisibleAreaLayer(
 					`https://canadian-census-map.kafkaesque.blog/tiles/areas/{z}/{x}/{y}.pbf/${currentLayerId}`,
 					currentLayerId,
-					firstLabelLayerId
+					firstLabelLayerId,
+					colorScale
 				),
 			],
 		});
@@ -164,6 +194,14 @@ import Dropdown from "./Dropdown";
 		map.addControl(deckOverlay);
 		updateLayers();
 	});
+
+	document
+		.getElementById("toggleVisibility")
+		.addEventListener("change", (event) => {
+			const target = event.target as HTMLInputElement;
+			mainLayerVisible = target.checked;
+			updateLayers();
+		});
 
 	window.addEventListener("optionSelected", (event) => {
 		const customEvent = event as CustomEvent;
@@ -194,7 +232,15 @@ import Dropdown from "./Dropdown";
 	});
 
 	document.getElementById("maxSlider").addEventListener("input", (event) => {
-		maxRange = (event.target as HTMLInputElement).value;
+		const target = event.target as HTMLInputElement;
+		const minValue = parseFloat(minRange);
+		const newValue = parseFloat(target.value);
+
+		if (newValue < minValue + 0.1) {
+			target.value = (minValue + 0.1).toString();
+		}
+
+		maxRange = target.value;
 		updateLayers();
 	});
 </script>
