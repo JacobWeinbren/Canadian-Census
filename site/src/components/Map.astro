@@ -28,7 +28,7 @@ import Dropdown from "./Dropdown";
 	</div>
 
 	<div id="maxSliderContainer" class="hidden w-full">
-		<p >Set Maximum Percentage</p>
+		<p>Set Maximum Percentage</p>
 		<input
 			id="maxSlider"
 			type="range"
@@ -44,9 +44,7 @@ import Dropdown from "./Dropdown";
 
 	<!-- Add the checkbox here -->
 	<div class="flex items-center gap-2">
-		<label for="toggleVisibility"
-			>Toggle Layer Visibility</label
-		>
+		<label for="toggleVisibility">Toggle Layer Visibility</label>
 		<div
 			class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
 		>
@@ -92,6 +90,13 @@ import Dropdown from "./Dropdown";
 	let maxRange = updatedRanges[currentLayerId].max;
 	let mainLayerVisible = true;
 
+	function formatValue(value) {
+		const num = parseFloat(value);
+		if (num >= 1000) return Math.round(num).toLocaleString();
+		if (num >= 10) return Math.round(num).toString();
+		return num.toFixed(1);
+	}
+
 	function updateLegend(min, max, colorScale, layerId) {
 		const gradientColors = colorScale.colors(5).join(", ");
 		document.getElementById("gradient").style.background =
@@ -100,8 +105,8 @@ import Dropdown from "./Dropdown";
 		const selectedItem = menuItems.find((item) => item.id == layerId);
 		const unit = selectedItem?.divisor ? "%" : "";
 
-		const minValue = parseFloat(min).toFixed(1);
-		const maxValue = parseFloat(max).toFixed(1);
+		const minValue = formatValue(min);
+		const maxValue = formatValue(max);
 
 		document.getElementById("min").textContent = `${minValue}${unit}`;
 		document.getElementById("max").textContent = `${maxValue}${unit}`;
@@ -145,8 +150,9 @@ import Dropdown from "./Dropdown";
 						(item) => item.id == layerId
 					);
 					const unit = selectedItem?.divisor ? "%" : "";
+					const formattedValue = formatValue(value);
 					document.getElementById("hover").textContent =
-						`Current value is ${value}${unit}`;
+						`Current value is ${formattedValue}${unit}`;
 				} else {
 					document.getElementById("hover").textContent =
 						"Hover over a point to see its value.";
@@ -157,9 +163,14 @@ import Dropdown from "./Dropdown";
 	}
 
 	function updateLayers() {
-		
 		const colorScale = chroma
-			.scale(["#c67718ff", "#fbb664ff", "#ffe7c7ff", "#987ac3ff", "#4e2c7eff"])
+			.scale([
+				"#c67718ff",
+				"#fbb664ff",
+				"#ffe7c7ff",
+				"#987ac3ff",
+				"#4e2c7eff",
+			])
 			.domain([minRange, maxRange]);
 
 		updateLegend(minRange, maxRange, colorScale, currentLayerId);
