@@ -13,11 +13,16 @@ const options = Object.keys(updatedMenuList).flatMap((header) => [
 
 const filterOption = (option, inputValue) => {
 	const searchValue = inputValue.toLowerCase();
-	return option.isHeader
-		? updatedMenuList[option.label].some((item) =>
+	if (option.isHeader) {
+		return (
+			option.label.toLowerCase().includes(searchValue) ||
+			updatedMenuList[option.label].some((item) =>
 				item.name.toLowerCase().includes(searchValue)
-		  )
-		: option.label.toLowerCase().includes(searchValue);
+			)
+		);
+	} else {
+		return option.label.toLowerCase().includes(searchValue);
+	}
 };
 
 const ListPicker = () => {
@@ -27,9 +32,35 @@ const ListPicker = () => {
 	const parentRef = useRef(null);
 	const searchInputRef = useRef(null);
 
-	const filteredOptions = options.filter((option) =>
-		filterOption(option, searchTerm)
-	);
+	const filteredOptions = [];
+	const addedHeaders = new Set();
+
+	options.forEach((option) => {
+		if (option.isHeader) {
+			if (option.label.toLowerCase().includes(searchTerm.toLowerCase())) {
+				// Include the header and all its descendants
+				filteredOptions.push(option);
+				updatedMenuList[option.label].forEach((item) => {
+					filteredOptions.push({
+						value: item.id,
+						label: item.name,
+						header: option.label,
+					});
+				});
+				addedHeaders.add(option.label);
+			}
+		} else if (filterOption(option, searchTerm)) {
+			// Include the item and its header if it matches the search term
+			if (!addedHeaders.has(option.header)) {
+				const headerOption = options.find(
+					(opt) => opt.isHeader && opt.label === option.header
+				);
+				filteredOptions.push(headerOption);
+				addedHeaders.add(option.header);
+			}
+			filteredOptions.push(option);
+		}
+	});
 
 	const visibleOptions = filteredOptions.filter(
 		(option) => option.isHeader || visibleCategories[option.header]
@@ -60,20 +91,14 @@ const ListPicker = () => {
 	}, []);
 
 	useEffect(() => {
-		if (searchTerm) {
-			// Unfold all categories when searching
-			const allCategories = Object.keys(updatedMenuList).reduce(
-				(acc, header) => {
-					acc[header] = true;
-					return acc;
-				},
-				{}
-			);
-			setVisibleCategories(allCategories);
-		} else {
-			// Fold all categories when not searching
-			setVisibleCategories({});
-		}
+		setVisibleCategories(
+			searchTerm
+				? Object.keys(updatedMenuList).reduce(
+						(acc, header) => ({ ...acc, [header]: true }),
+						{}
+				  )
+				: {}
+		);
 	}, [searchTerm]);
 
 	const handleOptionClick = (option) => {
@@ -84,19 +109,18 @@ const ListPicker = () => {
 			}));
 		} else {
 			setIsVisible(false);
-
 			const heading = Object.keys(updatedMenuList).find((header) =>
 				updatedMenuList[header].some((item) => item.id === option.value)
 			);
-
-			const event = new CustomEvent("optionSelected", {
-				detail: {
-					value: option.value,
-					name: option.label,
-					heading: heading,
-				},
-			});
-			window.dispatchEvent(event);
+			window.dispatchEvent(
+				new CustomEvent("optionSelected", {
+					detail: {
+						value: option.value,
+						name: option.label,
+						heading,
+					},
+				})
+			);
 		}
 	};
 
@@ -142,6 +166,7 @@ const ListPicker = () => {
 										left: 0,
 										width: "100%",
 										transform: `translateY(${virtualRow.start}px)`,
+										userSelect: "none", // Make text non-selectable
 									}}
 									onClick={() => handleOptionClick(option)}
 								>
