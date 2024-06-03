@@ -28,7 +28,7 @@ import Dropdown from "./Dropdown";
 	</div>
 
 	<div id="maxSliderContainer" class="hidden w-full">
-		<p>Set Maximum Percentage</p>
+		<p >Set Maximum Percentage</p>
 		<input
 			id="maxSlider"
 			type="range"
@@ -44,7 +44,9 @@ import Dropdown from "./Dropdown";
 
 	<!-- Add the checkbox here -->
 	<div class="flex items-center gap-2">
-		<label for="toggleVisibility">Toggle Layer Visibility</label>
+		<label for="toggleVisibility"
+			>Toggle Layer Visibility</label
+		>
 		<div
 			class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
 		>
@@ -98,17 +100,14 @@ import Dropdown from "./Dropdown";
 		const selectedItem = menuItems.find((item) => item.id == layerId);
 		const unit = selectedItem?.divisor ? "%" : "";
 
-		const minValue = selectedItem?.divisor
-			? parseFloat(min).toFixed(1)
-			: parseFloat(min).toFixed(0);
-		const maxValue = selectedItem?.divisor
-			? parseFloat(max).toFixed(1)
-			: parseFloat(max).toFixed(0);
+		const minValue = parseFloat(min).toFixed(1);
+		const maxValue = parseFloat(max).toFixed(1);
+
 		document.getElementById("min").textContent = `${minValue}${unit}`;
 		document.getElementById("max").textContent = `${maxValue}${unit}`;
 		document.getElementById("subtitle").textContent = selectedOptionName;
 	}
-	
+
 	function createMVTLayer(dataUrl, layerId, beforeId, colorScale) {
 		return new MVTLayer({
 			id: "buildings",
@@ -158,14 +157,9 @@ import Dropdown from "./Dropdown";
 	}
 
 	function updateLayers() {
+		
 		const colorScale = chroma
-			.scale([
-				"#c67718ff",
-				"#fbb664ff",
-				"#ffe7c7ff",
-				"#987ac3ff",
-				"#4e2c7eff",
-			])
+			.scale(["#c67718ff", "#fbb664ff", "#ffe7c7ff", "#987ac3ff", "#4e2c7eff"])
 			.domain([minRange, maxRange]);
 
 		updateLegend(minRange, maxRange, colorScale, currentLayerId);
