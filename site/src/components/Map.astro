@@ -157,8 +157,9 @@ import Dropdown from "./Dropdown";
 	}
 
 	function updateLayers() {
+		
 		const colorScale = chroma
-			.scale(["#ca0020", "#f4a582", "#f7f7f7", "#92c5de", "#0571b0"])
+			.scale(["#c67718ff", "#fbb664ff", "#ffe7c7ff", "#b983c3ff", "#73377eff"])
 			.domain([minRange, maxRange]);
 
 		updateLegend(minRange, maxRange, colorScale, currentLayerId);

@@ -6,6 +6,11 @@
 -   Calculated variables (e.g., median age) are retained
 -   Total variables are retained
 
+## Sources
+
+-   [Boundaries](https://www150.statcan.gc.ca/n1/pub/92-160-g/92-160-g2021001-eng.htm)
+-   [Census Data](https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?Lang=E)
+
 ## File Summaries
 
 -   **scripts/menu_list.py**: Parses CSV to extract and structure characteristics.
