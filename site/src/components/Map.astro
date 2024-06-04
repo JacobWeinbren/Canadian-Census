@@ -111,14 +111,6 @@ import Dropdown from "./Dropdown";
 		document.getElementById("min").textContent = `${minValue}${unit}`;
 		document.getElementById("max").textContent = `${maxValue}${unit}`;
 		document.getElementById("subtitle").textContent = selectedOptionName;
-
-		// Set the min attribute of the maxSlider input
-		const maxSlider = document.getElementById(
-			"maxSlider"
-		) as HTMLInputElement;
-		if (maxSlider) {
-			maxSlider.min = Math.ceil(min + 0.1).toString();
-		}
 	}
 
 	function createMVTLayer(dataUrl, layerId, beforeId, colorScale) {
@@ -237,6 +229,14 @@ import Dropdown from "./Dropdown";
 		const maxSliderContainer =
 			document.getElementById("maxSliderContainer");
 
+		// Set the min attribute of the maxSlider input
+		const maxSlider = document.getElementById(
+			"maxSlider"
+		) as HTMLInputElement;
+		if (maxSlider) {
+			maxSlider.min = Math.ceil(minRange + 0.1).toString();
+		}
+
 		if (selectedItem?.divisor) {
 			maxSliderContainer.classList.remove("hidden");
 			const maxSlider = document.getElementById(
@@ -252,8 +252,8 @@ import Dropdown from "./Dropdown";
 	});
 
 	document.getElementById("maxSlider").addEventListener("input", (event) => {
-        const target = (event.target) as HTMLInputElement;
-        maxRange = target.value;
-        updateLayers();
-    });
+		const target = event.target as HTMLInputElement;
+		maxRange = target.value;
+		updateLayers();
+	});
 </script>
