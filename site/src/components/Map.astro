@@ -98,20 +98,26 @@ import Dropdown from "./Dropdown";
 	}
 
 	function updateLegend(min, max, colorScale, layerId) {
-		const gradientColors = colorScale.colors(5).join(", ");
-		document.getElementById("gradient").style.background =
-			`linear-gradient(to right, ${gradientColors})`;
+	const gradientColors = colorScale.colors(5).join(", ");
+	document.getElementById("gradient").style.background =
+		`linear-gradient(to right, ${gradientColors})`;
 
-		const selectedItem = menuItems.find((item) => item.id == layerId);
-		const unit = selectedItem?.divisor ? "%" : "";
+	const selectedItem = menuItems.find((item) => item.id == layerId);
+	const unit = selectedItem?.divisor ? "%" : "";
 
-		const minValue = formatValue(min);
-		const maxValue = formatValue(max);
+	const minValue = formatValue(min);
+	const maxValue = formatValue(max);
 
-		document.getElementById("min").textContent = `${minValue}${unit}`;
-		document.getElementById("max").textContent = `${maxValue}${unit}`;
-		document.getElementById("subtitle").textContent = selectedOptionName;
+	document.getElementById("min").textContent = `${minValue}${unit}`;
+	document.getElementById("max").textContent = `${maxValue}${unit}`;
+	document.getElementById("subtitle").textContent = selectedOptionName;
+
+	// Set the min attribute of the maxSlider input
+	const maxSlider = document.getElementById("maxSlider") as HTMLInputElement;
+	if (maxSlider) {
+		maxSlider.min = (Math.ceil((min + 0.1) * 10) / 10).toFixed(0);
 	}
+}
 
 	function createMVTLayer(dataUrl, layerId, beforeId, colorScale) {
 		return new MVTLayer({
@@ -245,13 +251,6 @@ import Dropdown from "./Dropdown";
 
 	document.getElementById("maxSlider").addEventListener("input", (event) => {
 		const target = event.target as HTMLInputElement;
-		const minValue = parseFloat(minRange);
-		const newValue = parseFloat(target.value);
-
-		if (newValue < minValue + 0.1) {
-			target.value = (minValue + 0.1).toString();
-		}
-
 		maxRange = target.value;
 		updateLayers();
 	});
